@@ -12,6 +12,8 @@ static uint8_t to_flash_buf[ERASE_PAGE_SIZE + MAX_WRITE_UNIT];
 // off_t status_address = 0;
 off_t status_address = PRIMARY_OFFSET + PAGE_SIZE*4;
 uint8_t opFlag = 0;	
+/** variable used to indicate source image should be moved up how many pages before aplly */
+uint8_t move_up_pages = 8;			
 struct detools_apply_patch_t apply_patch;
 
 
@@ -33,7 +35,7 @@ static int delta_init_flash_mem(struct flash_mem *flash)
 		return -DELTA_NO_FLASH_FOUND;
 	}
 
-	flash->from_current = PRIMARY_OFFSET + PAGE_SIZE*19;
+	flash->from_current = PRIMARY_OFFSET + PAGE_SIZE * move_up_pages;
 	flash->from_end = flash->from_current + PRIMARY_SIZE - PAGE_SIZE;
 
 	flash->to_current = PRIMARY_OFFSET;
@@ -50,8 +52,8 @@ static int delta_init_flash_mem(struct flash_mem *flash)
 
 	image_position_adjust.count = 0;
 
-	// printf("\nInit: from_current=%p to_current=%p patch_current=%p STATUS_ADDRESS=%p backup_addr=0x%X\t write_size=%d\n",
-	// 		flash->from_current, flash->to_current, flash->patch_current,status_address,flash->backup_addr, flash->write_size);
+	printf("\nInit: from_current=%p to_current=%p patch_current=%p STATUS_ADDRESS=%p backup_addr=0x%X\t write_size=%d\n",
+			flash->from_current, flash->to_current, flash->patch_current,status_address,flash->backup_addr, flash->write_size);
 
 	return DELTA_OK;
 }

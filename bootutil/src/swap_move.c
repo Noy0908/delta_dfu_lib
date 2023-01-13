@@ -35,7 +35,8 @@ extern const struct device *flash_device;
 extern  uint8_t opFlag ;
 extern off_t status_address;
 extern struct detools_apply_patch_t apply_patch;
-
+/** variable used to indicate source image should be moved up how many pages before aplly */
+extern uint8_t move_up_pages;	
 extern fih_int get_source_hash(const struct flash_area *fap,uint8_t *hash_buf);
 #endif
 
@@ -549,7 +550,7 @@ swap_run(struct boot_loader_state *state, struct boot_status *bs,
             }
             first_trailer_idx--;
         }
-
+        // printf("g_last_idx=%d first_trailer_idx=%d trailer_sz=%d\r\n",g_last_idx,first_trailer_idx,trailer_sz);
         if (g_last_idx >= first_trailer_idx) {
             BOOT_LOG_WRN("Not enough free space to run swap upgrade");
             BOOT_LOG_WRN("required %d bytes but only %d are available",
@@ -590,12 +591,17 @@ swap_run(struct boot_loader_state *state, struct boot_status *bs,
     }
 #endif
 	rc = delta_read_patch_header(source_hash, &patch_size, &opFlag);
-	// printf("##patch_size = %d\t opFlag = %d\r\n", patch_size, opFlag);
 	if (rc < 0) {
 		printf("ret=%d	read patch file error, exit delta update process!!!\n", rc);
         flash_area_erase(fap_sec, 0, flash_area_get_size(fap_sec));       //just for test
 		return;
 	}
+    else
+    {
+        // move_up_pages = 8 + ((patch_size/2)/PAGE_SIZE);
+        move_up_pages = 10 + ((patch_size/2)/PAGE_SIZE);
+        printf("##patch_size = %d\t opFlag = %02X\t move_up_pages=%d\r\n", patch_size, opFlag, move_up_pages);
+    }
 #endif
 
     fixup_revert(state, bs, fap_sec);
@@ -628,7 +634,7 @@ swap_run(struct boot_loader_state *state, struct boot_status *bs,
         idx = g_last_idx;
         while (idx > 0) {
             if (idx <= (g_last_idx - bs->idx + 1)) {
-                boot_move_sector_up_pages(idx, sector_sz, 19, state, bs, fap_pri, fap_sec);
+                boot_move_sector_up_pages(idx, sector_sz, move_up_pages, state, bs, fap_pri, fap_sec);
             }
             idx--;
         }
