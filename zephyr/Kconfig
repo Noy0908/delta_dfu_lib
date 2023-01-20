@@ -208,6 +208,16 @@ config BOOT_UPGRADE_APP_DELTA
 	  it's just a patch file only the parts of the firmware that have changed instead of the whole firmware.
 
 
+# config BOOT_DELTA_DFU_WRITE_STATUS_DYNAMIC
+# 	bool "dynamically adjust status storage area during delta dfu"
+# 	depends on BOOT_UPGRADE_APP_DELTA
+# 	default n
+# 	help
+# 	  Enable support for adjusting status storage area during delta dfu dynamically. 
+# 	  If y, apply status will be saved on different pages during delta upgrade ,
+# 	  but it will need 10 more pages flash overhead than fixed storage area.
+
+
 choice BOOT_IMAGE_UPGRADE_MODE
 	prompt "Image upgrade modes"
 	default BOOT_SWAP_USING_MOVE if SOC_FAMILY_NRF
