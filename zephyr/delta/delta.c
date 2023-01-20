@@ -555,7 +555,7 @@ int traverse_delta_file(struct flash_mem *flash, struct detools_apply_patch_t *a
 	if (ret) {
 		return ret;
 	}
-#ifdef DELTA_ENABLE_LOG
+#ifndef DELTA_ENABLE_LOG
 	printf("\nTraverse: from_current=%p\t size=0x%X\t to_current=%p\t size=0x%X\t patch_current=%p\t patch_end=%p\t backup_addr=0x%X\n",
 		flash->from_current,PRIMARY_SIZE,flash->to_current,SECONDARY_SIZE,flash->patch_current,flash->patch_end, flash->backup_addr);
 #endif

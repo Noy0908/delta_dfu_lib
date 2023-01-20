@@ -72,6 +72,7 @@ struct flash_area;
 #define BOOT_STATUS_OP_SWAP     2
 #if defined(MCUBOOT_DELTA_UPGRADE)
 #define BOOT_STATUS_OP_APPLY    3
+#define BOOT_STATUS_OP_RESTORE  4
 #endif
 
 
