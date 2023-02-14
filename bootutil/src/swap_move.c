@@ -647,7 +647,7 @@ swap_run(struct boot_loader_state *state, struct boot_status *bs,
     #ifdef MCUBOOT_WRITE_STATUS_DYNAMIC
         move_up_pages = 10 + ((patch_size/2)/PAGE_SIZE);
     #else
-        move_up_pages = (patch_size/2)/PAGE_SIZE;
+        move_up_pages = (((patch_size/2)/PAGE_SIZE > 0) ? ((patch_size/2)/PAGE_SIZE) : 1) ;
     #endif
         printf("##patch_size = %d\t opFlag = %02X\t move_up_pages=%d\r\n", patch_size, opFlag, move_up_pages);
     }
