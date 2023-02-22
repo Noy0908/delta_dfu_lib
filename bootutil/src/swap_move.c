@@ -639,7 +639,7 @@ swap_run(struct boot_loader_state *state, struct boot_status *bs,
 	rc = delta_read_patch_header(source_hash, &patch_size, &opFlag);
 	if (rc < 0) {
 		printf("ret=%d	read patch file error, exit delta update process!!!\n", rc);
-        flash_area_erase(fap_sec, 0, flash_area_get_size(fap_sec));       //just for test
+        flash_area_erase(fap_sec, 0, flash_area_get_size(fap_sec));       
 		return;
 	}
     else
@@ -692,7 +692,7 @@ swap_run(struct boot_loader_state *state, struct boot_status *bs,
     }
 
     struct flash_mem flash_pt = {0};
-    /** This step try to find the old image pages which will be used after be erased*/
+    /** This step try to check if the apply process can excute correctly*/
     if(opFlag == DELTA_OP_TRAVERSE)
     { 
         if(traverse_delta_file(&flash_pt, &apply_patch) > 0)

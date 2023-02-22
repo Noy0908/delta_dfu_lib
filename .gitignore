@@ -1,2 +1,5 @@
 zephyr/build/
 zephyr/build_*/
+zephyr/delta_dfu_lib/build/
+zephyr/delta_dfu_lib/src/
+zephyr/delta/

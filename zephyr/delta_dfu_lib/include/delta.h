@@ -4,8 +4,8 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-#ifndef DELTA_H
-#define DELTA_H
+#ifndef __DELTA_H_
+#define __DELTA_H_
 
 #include <zephyr/zephyr.h>
 #include <zephyr/sys/util.h>
@@ -47,7 +47,6 @@
 #define ADDR_LEN 4
 #define DATA_HEADER (DATA_LEN+ADDR_LEN)
 
-#define MAGIC_VALUE3 0x20221500
 #define ERASE_PAGE_SIZE (PAGE_SIZE*2)
 
 #define IMAGE_ARRAY_SIZE PAGE_SIZE
@@ -114,41 +113,84 @@ struct bak_flash_mem {
 /* FUNCTION DECLARATIONS */
 
 /**
- * Checks if there is patch in the patch partition
- * and applies that patch if it exists. Then restarts
- * the device and boots from the new image.
+ * Functiong try to check if the apply process can excute correctly
  *
- * @param[in] flash the devices flash memory.
+ * @param[in] flash the devices flash memory
+ * @param[in] apply_patch a pointer to assign the write/read flash function.
  *
- * @return zero(0) if no patch or a negative error
- * code.
+ * @return if not patch, a negative value (0>) representing an error, 
+ * or a positive value (0<) representing the patch size.
  */
 int traverse_delta_file(struct flash_mem *flash, struct detools_apply_patch_t *apply_patch);
+
+/**
+ * Functiong to init flash parameter
+ *
+ * @param[in] flash the devices flash memory
+ * @param[in] patch_size the size of patch file.
+ * @param[in] apply_patch a pointer to assign the write/read flash function.
+ *
+ * @return i a negative value (0>) representing an error, 
+ * 			or a positive value (0<=) representing the patch size.
+ */
 int delta_apply_init(struct flash_mem *flash,uint32_t patch_size,struct detools_apply_patch_t *apply_patch);
+
+/**
+ * Functiong to excute the apply process, once it starts, the image file can not be restored
+ *
+ * @param[in] flash the devices flash memory
+ * @param[in] apply_patch a pointer to assign the write/read flash function.
+ *
+ * @return i a negative value (0>) representing an error, 
+ * 			or a positive value (0<=) representing the patch size.
+ */
 int delta_check_and_apply(struct flash_mem *flash, struct detools_apply_patch_t *apply_patch);
 
 /**
- * Functiong for reading the metadata from the patch and
- * changing the header to mark that the patch has been
- * applied.
+ * Functiong for reading the metadata from the patch
  *
- * @param[in] flash the devices flash memory.
+ * @param[in] hash_buf the source image hash value to verify if the patch file is valid.
+ * @param[in] size a pointer to save the patch size value.
+ * @param[in] op a pointer to indicate current apply operation.
  *
- * @return zero(0) if not patch, a negative value (0>)
- * representing an error, or a positive value (0<)
- * representing the patch size.
+ * @return if not patch, a negative value (0>) representing an error, 
+ * or a positive value (0<) representing the patch size.
  */
 int delta_read_patch_header(uint8_t *hash_buf, uint32_t *size, uint8_t *op);
 
+/**
+ * Functiong for saving the apply status before you erase the image data
+ * enable the dynamic save backup data
+ *
+ * @return  the flash address of backup data
+ */
 int apply_write_status(struct flash_mem *flash,off_t addr);
 
+/**
+ * Functiong for getting the address of backup data, this function is called only when you 
+ * enable the dynamic save backup data
+ *
+ * @return  the flash address of backup data
+ */
 off_t get_status_address(void);
+
 
 int apply_backup_write_status(struct flash_mem *flash_mem);
 
+
+/**
+ * Functiong for reading the apply status when device reboot
+ *
+ * @param[in] flash the devices flash memory
+ *
+ * @return if not patch, a negative value (0>) representing an error, 
+ * 			or 0 representing the patch size.
+ */
 int apply_read_status(struct flash_mem *flash);
 
+
 int increase_patch_offset(void *arg_p,off_t size);
+
 
 int write_last_buffer(void *arg_p);
 
