@@ -187,7 +187,7 @@ typedef int (*detools_step_get_t)(void *arg_p, int *step_p);
 
 #if DETOOLS_CONFIG_COMPRESSION_HEATSHRINK == 1
 
-#include "../heatshrink/heatshrink_decoder.h"
+#include "heatshrink_decoder.h"
 
 struct detools_apply_patch_patch_reader_heatshrink_t {
     int8_t window_sz2;

@@ -3,8 +3,8 @@
  *
  * SPDX-License-Identifier: Apache-2.0
  */
-#include "delta.h"
-#include "../include/mcuboot_config/mcuboot_config.h"
+#include "../include/delta.h"
+#include "../../include/mcuboot_config/mcuboot_config.h"
 
 const struct device *flash_device;
 uint32_t patch_size; 
@@ -571,7 +571,7 @@ int traverse_delta_file(struct flash_mem *flash, struct detools_apply_patch_t *a
 		return ret;
 	}
 #ifndef DELTA_ENABLE_LOG
-	printf("\nTraverse: from_current=0X%X\t size=0X%X\t to_current=0X%X\t size=0x%X\t patch_current=0X%X\t patch_end=0X%X\t backup_addr=0X%X\n",
+	printf("\nTraverse: from_current=0X%X\t size=0x%X\t to_current=0X%X\t size=0x%X\t patch_current=0X%X\t patch_end=0X%X\t backup_addr=0x%X\n",
 		flash->from_current,PRIMARY_SIZE,flash->to_current,SECONDARY_SIZE,flash->patch_current,flash->patch_end, flash->backup_addr);
 #endif
 	ret = apply_patch_process(apply_patch, delta_flash_patch_read, patch_size, 0, flash);

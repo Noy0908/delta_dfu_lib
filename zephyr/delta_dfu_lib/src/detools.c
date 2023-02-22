@@ -31,8 +31,8 @@
  */
 
 #include <stdlib.h>
-#include "detools.h"
-#include "../delta/delta.h"
+#include "../include/detools.h"
+#include "../include/delta.h"
 /* Patch types. */
 #define PATCH_TYPE_SEQUENTIAL                               0
 

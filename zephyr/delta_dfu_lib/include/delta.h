@@ -15,7 +15,7 @@
 #include <zephyr/storage/flash_map.h>
 #include <zephyr/dfu/mcuboot.h>
 #include <sys/reboot.h>
-#include "../detools/detools.h"
+#include "detools.h"
 
 
 // #define DELTA_ENABLE_LOG			1

@@ -28,7 +28,7 @@
 #include "mcuboot_config/mcuboot_config.h"
 
 #ifdef MCUBOOT_DELTA_UPGRADE
-#include "../../zephyr/delta/delta.h"
+#include "../../zephyr/delta_dfu_lib/include/delta.h"
 #define FLASH_NODEID 	DT_CHOSEN(zephyr_flash_controller)
 extern uint32_t patch_size; 
 extern const struct device *flash_device;
