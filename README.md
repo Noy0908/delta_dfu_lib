@@ -11,8 +11,9 @@ A delta firmware upgrade consists of the following steps:
 - Checking the result of the delta update
 
 ##### (1). install essential tools
-you should install detools on your PC: enter  "pip install detools"  command in the python environment.
-you should install cryptography,intelhex,click,cbor: enter  "pip install -r requirements.txt" command in the python environment.
+you should install detools on your PC: enter  <font color = "green">"**pip install detools**"</font>  command in the python environment.
+
+you should install cryptography,intelhex,click,cbor: enter <font color = "green">"**pip install -r requirements.txt**"</font> command in the python environment.
 
 ##### (2). pull the new boot code to replace your old code 
 you should pull the new boot code from below url and replace the boot folder in your SDK directory (v2.x.x/bootloader/ mcubboot/boot),  
@@ -21,6 +22,7 @@ remember to change the folder name to boot or copy the folder contents to boot f
 https://github.com/Noy0908/delta_dfu_lib.git              The latest branch is dev
 
 ##### (3). prepare test application
+
 - you can test it on any application samples,  but need to create two folders in your project root directory to save images and patch file. 
 one is "binaries/signed_images"  which used to save source image and target image; the other is "binaries/patches" which used to save patch image. 
 ![binaries](zephyr\delta_dfu_lib\picture\folders.png)
