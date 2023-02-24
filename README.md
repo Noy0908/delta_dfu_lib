@@ -19,11 +19,25 @@ you should install cryptography,intelhex,click,cbor: enter <font color = "green"
 you should pull the new boot code from below url and replace the boot folder in your SDK directory (v2.x.x/bootloader/ mcubboot/boot),  
 remember to change the folder name to boot or copy the folder contents to boot folder. 
 
-https://github.com/Noy0908/delta_dfu_lib.git              The latest branch is dev
+https://github.com/Noy0908/delta_dfu_lib.git              
+
+**delta_dfu_lib_9160** branch is the library for nRF9160;
+
+**delta_dfu_lib_52840** branch is the library for nRF52840
 
 ##### (3). prepare test application
 
-- you can test it on any application samples,  but need to create two folders in your project root directory to save images and patch file. 
+- you can test it on our demoes. We provide two demoed, one is for nRF9169, the other is for nRF52840, below is the url and branches.
+
+  https://github.com/Noy0908/delta_dfu.git
+
+  **9160-delta-ota** is the demo for nRF9160
+
+  **52840-delta-ota** is the demo for nRF52840
+
+  <font color = "red">**remember thatwhen you test different demoes, you must switch the  delta_dfu_lib to the corresponding branch.  For example, 9160-delta-ota corresponds to delta_dfu_lib_9160**</font>.
+
+- Of course you can test it on any application samples,  but need to create two folders in your project root directory to save images and patch file. 
 one is "binaries/signed_images"  which used to save source image and target image; the other is "binaries/patches" which used to save patch image. 
 ![binaries](zephyr\delta_dfu_lib\picture\folders.png)
 
