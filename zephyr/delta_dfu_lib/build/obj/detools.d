@@ -1,6 +1,6 @@
 C:/NCS_SDK/v2.1.0/bootloader/mcuboot/boot/zephyr/delta_dfu_lib/build/obj/detools.o: \
  src/detools.c \
- C:/Work/git/asset_tracker_new/build/s1_image/zephyr/include/generated/autoconf.h \
+ C:/Work/git/delta_dfu/build_9160/mcuboot/zephyr/include/generated/autoconf.h \
  C:/NCS_SDK/v2.1.0/zephyr/include/zephyr/toolchain/zephyr_stdint.h \
  C:/NCS_SDK/v2.1.0/zephyr/lib/libc/minimal/include/stdlib.h \
  c:\ncs_sdk\toolchains\v2.1.0\opt\zephyr-sdk\arm-zephyr-eabi\lib\gcc\arm-zephyr-eabi\10.3.0\include\stddef.h \
@@ -43,7 +43,7 @@ C:/NCS_SDK/v2.1.0/bootloader/mcuboot/boot/zephyr/delta_dfu_lib/build/obj/detools
  C:/NCS_SDK/v2.1.0/zephyr/include/zephyr/kernel/mempool_heap.h \
  C:/NCS_SDK/v2.1.0/zephyr/include/zephyr/kernel_version.h \
  C:/NCS_SDK/v2.1.0/zephyr/include/zephyr/syscall.h \
- C:/Work/git/asset_tracker_new/build/s1_image/zephyr/include/generated/syscall_list.h \
+ C:/Work/git/delta_dfu/build_9160/mcuboot/zephyr/include/generated/syscall_list.h \
  C:/NCS_SDK/v2.1.0/zephyr/include/zephyr/arch/syscall.h \
  C:/NCS_SDK/v2.1.0/zephyr/include/zephyr/arch/arm/aarch32/syscall.h \
  C:/NCS_SDK/v2.1.0/zephyr/include/zephyr/sys/printk.h \
@@ -55,8 +55,8 @@ C:/NCS_SDK/v2.1.0/bootloader/mcuboot/boot/zephyr/delta_dfu_lib/build/obj/detools
  C:/NCS_SDK/v2.1.0/zephyr/include/zephyr/arch/arm/aarch32/arch_inlines.h \
  C:/NCS_SDK/v2.1.0/zephyr/include/zephyr/arch/arm/aarch32/arch.h \
  C:/NCS_SDK/v2.1.0/zephyr/include/zephyr/devicetree.h \
- C:/Work/git/asset_tracker_new/build/s1_image/zephyr/include/generated/devicetree_unfixed.h \
- C:/Work/git/asset_tracker_new/build/s1_image/zephyr/include/generated/devicetree_fixups.h \
+ C:/Work/git/delta_dfu/build_9160/mcuboot/zephyr/include/generated/devicetree_unfixed.h \
+ C:/Work/git/delta_dfu/build_9160/mcuboot/zephyr/include/generated/devicetree_fixups.h \
  C:/NCS_SDK/v2.1.0/zephyr/include/zephyr/devicetree/io-channels.h \
  C:/NCS_SDK/v2.1.0/zephyr/include/zephyr/devicetree/clocks.h \
  C:/NCS_SDK/v2.1.0/zephyr/include/zephyr/devicetree/gpio.h \
@@ -96,30 +96,30 @@ C:/NCS_SDK/v2.1.0/bootloader/mcuboot/boot/zephyr/delta_dfu_lib/build/obj/detools
  C:/NCS_SDK/v2.1.0/zephyr/include/zephyr/app_memory/mem_domain.h \
  C:/NCS_SDK/v2.1.0/zephyr/include/zephyr/kernel/thread.h \
  C:/NCS_SDK/v2.1.0/zephyr/include/zephyr/sys/kobject.h \
- C:/Work/git/asset_tracker_new/build/s1_image/zephyr/include/generated/kobj-types-enum.h \
- C:/Work/git/asset_tracker_new/build/s1_image/zephyr/include/generated/syscalls/kobject.h \
+ C:/Work/git/delta_dfu/build_9160/mcuboot/zephyr/include/generated/kobj-types-enum.h \
+ C:/Work/git/delta_dfu/build_9160/mcuboot/zephyr/include/generated/syscalls/kobject.h \
  C:/NCS_SDK/v2.1.0/zephyr/include/zephyr/tracing/tracing_syscall.h \
  C:/NCS_SDK/v2.1.0/zephyr/lib/libc/minimal/include/errno.h \
  C:/NCS_SDK/v2.1.0/zephyr/include/zephyr/sys/errno_private.h \
- C:/Work/git/asset_tracker_new/build/s1_image/zephyr/include/generated/syscalls/errno_private.h \
+ C:/Work/git/delta_dfu/build_9160/mcuboot/zephyr/include/generated/syscalls/errno_private.h \
  C:/NCS_SDK/v2.1.0/zephyr/include/zephyr/tracing/tracing_macros.h \
  C:/NCS_SDK/v2.1.0/zephyr/include/zephyr/tracing/tracing.h \
  C:/NCS_SDK/v2.1.0/zephyr/include/zephyr/tracing/tracking.h \
- C:/Work/git/asset_tracker_new/build/s1_image/zephyr/include/generated/syscalls/kernel.h \
+ C:/Work/git/delta_dfu/build_9160/mcuboot/zephyr/include/generated/syscalls/kernel.h \
  C:/NCS_SDK/v2.1.0/zephyr/include/zephyr/device.h \
  C:/NCS_SDK/v2.1.0/zephyr/include/zephyr/init.h \
  C:/NCS_SDK/v2.1.0/zephyr/include/zephyr/sys/device_mmio.h \
  C:/NCS_SDK/v2.1.0/zephyr/include/zephyr/sys/mem_manage.h \
- C:/Work/git/asset_tracker_new/build/s1_image/zephyr/include/generated/syscalls/mem_manage.h \
- C:/Work/git/asset_tracker_new/build/s1_image/zephyr/include/generated/device_extern.h \
- C:/Work/git/asset_tracker_new/build/s1_image/zephyr/include/generated/syscalls/device.h \
+ C:/Work/git/delta_dfu/build_9160/mcuboot/zephyr/include/generated/syscalls/mem_manage.h \
+ C:/Work/git/delta_dfu/build_9160/mcuboot/zephyr/include/generated/device_extern.h \
+ C:/Work/git/delta_dfu/build_9160/mcuboot/zephyr/include/generated/syscalls/device.h \
  C:/NCS_SDK/v2.1.0/zephyr/include/zephyr/drivers/flash.h \
  C:/NCS_SDK/v2.1.0/zephyr/lib/libc/minimal/include/sys/types.h \
  C:/NCS_SDK/v2.1.0/zephyr/lib/libc/minimal/include/sys/_types.h \
- C:/Work/git/asset_tracker_new/build/s1_image/zephyr/include/generated/syscalls/flash.h \
+ C:/Work/git/delta_dfu/build_9160/mcuboot/zephyr/include/generated/syscalls/flash.h \
  C:/NCS_SDK/v2.1.0/zephyr/include/zephyr/storage/flash_map.h \
  C:/NCS_SDK/v2.1.0/nrf/include/flash_map_pm.h \
- C:/Work/git/asset_tracker_new/build/s1_image/zephyr/include/generated/pm_config.h \
+ C:/Work/git/delta_dfu/build_9160/mcuboot/zephyr/include/generated/pm_config.h \
  C:/NCS_SDK/v2.1.0/zephyr/include/zephyr/dfu/mcuboot.h \
  C:/NCS_SDK/v2.1.0/zephyr/include/zephyr/sys/reboot.h \
  src/../include/detools.h

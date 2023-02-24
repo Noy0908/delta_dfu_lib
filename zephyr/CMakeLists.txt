@@ -369,16 +369,6 @@ endif()
 
 # support application delta dfu
 if(DEFINED CONFIG_BOOT_UPGRADE_APP_DELTA)
-  # zephyr_library_sources(
-  #   delta_dfu_lib/src/detools.c
-  #   delta_dfu_lib/src/heatshrink_decoder.c
-  #   delta_dfu_lib/src/delta.c
-  # )
-
-  # target_sources(app PRIVATE ${BOOT_DIR}/zephyr/detools/detools.c)
-  # target_sources(app PRIVATE ${BOOT_DIR}/zephyr/heatshrink/heatshrink_decoder.c)
-  # # target_sources(app PRIVATE ${BOOT_DIR}/zephyr/delta/delta.c)
-
   # The external static library that we are linking with does not know
   # how to build for this platform so we export all the flags used in
   # this zephyr build to the external build system.
