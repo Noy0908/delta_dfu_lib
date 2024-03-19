@@ -857,9 +857,13 @@ int apply_patch_process(struct detools_apply_patch_t *apply_patch_p,
             patch_offset += chunk_size;
             increase_patch_offset(arg_p, chunk_size);
          
-            if(opFlag == DELTA_OP_APPLY)
+            // if(opFlag == DELTA_OP_APPLY)
+            // {
+            //      printf("------------patch_offset=%d\t patch_size=%d\t progress = %d%%\n", patch_offset,patch_size,patch_offset*100/patch_size);
+            // }
+            // else
             {
-                 printf("------------patch_offset=%d\t patch_size=%d\t progress = %d%%\n", patch_offset,patch_size,patch_offset*100/patch_size);
+                printf("------------patch_offset=%d\t tickets_at %" PRIu32 "\t progress = %d%%\n",  patch_offset,k_uptime_get_32(),patch_offset*100/patch_size);
             }
          
         } else {

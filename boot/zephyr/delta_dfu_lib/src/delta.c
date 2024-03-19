@@ -571,8 +571,8 @@ int traverse_delta_file(struct flash_mem *flash, struct detools_apply_patch_t *a
 		return ret;
 	}
 #ifndef DELTA_ENABLE_LOG
-	printf("\nTraverse: from_current=0X%lX\t size=0x%X\t to_current=0X%lX\t size=0x%X\t patch_current=0X%lX\t patch_end=0X%lX\t backup_addr=0X%lX\n",
-		flash->from_current,PRIMARY_SIZE,flash->to_current,SECONDARY_SIZE,flash->patch_current,flash->patch_end, flash->backup_addr);
+	printf("\nTraverse: mcuboot_pad=0X%X\t from_current=0X%lX\t size=0x%X\t to_current=0X%lX\t size=0x%X\t patch_current=0X%lX\t patch_end=0X%lX\t backup_addr=0X%lX\n",
+		MCUBOOT_PAD_SIZE,flash->from_current,PRIMARY_SIZE,flash->to_current,SECONDARY_SIZE,flash->patch_current,flash->patch_end, flash->backup_addr);
 #endif
 	ret = apply_patch_process(apply_patch, delta_flash_patch_read, patch_size, 0, flash);
 	

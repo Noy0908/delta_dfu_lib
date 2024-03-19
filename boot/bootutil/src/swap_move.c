@@ -596,6 +596,7 @@ swap_run(struct boot_loader_state *state, struct boot_status *bs,
     int rc;
 
     BOOT_LOG_INF("Starting swap using move algorithm.");
+    BOOT_LOG_INF("============Start Delta DFU at %" PRIu32 "\n", k_uptime_get_32());
 
     last_idx = find_last_idx(state, copy_size);
     sector_sz = boot_img_sector_size(state, BOOT_PRIMARY_SLOT, 0);
@@ -725,6 +726,7 @@ swap_run(struct boot_loader_state *state, struct boot_status *bs,
             goto restore;
         }     
     }
+    BOOT_LOG_INF("============Traverse end at %" PRIu32 "\n", k_uptime_get_32());
     /** Now we start to apply patch file to create new image*/
     if(opFlag == DELTA_OP_APPLY)
     { 
@@ -737,7 +739,7 @@ swap_run(struct boot_loader_state *state, struct boot_status *bs,
             bs->op = BOOT_STATUS_OP_RESTORE;
             goto restore;
         }  
-        
+
         printf("##Now start applying patch file!!!\r\n");
 
         rc = delta_apply_init(&flash_pt,patch_size,&apply_patch);
@@ -748,7 +750,7 @@ swap_run(struct boot_loader_state *state, struct boot_status *bs,
                  
         delta_check_and_apply(&flash_pt, &apply_patch);
     }
-
+    BOOT_LOG_INF("============Applying end at %" PRIu32 "\n", k_uptime_get_32());
 restore:
     if(bs->op == BOOT_STATUS_OP_RESTORE)
     {
