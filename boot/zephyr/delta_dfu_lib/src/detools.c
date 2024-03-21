@@ -870,7 +870,6 @@ int apply_patch_process(struct detools_apply_patch_t *apply_patch_p,
             res = -DETOOLS_IO_FAILED;
         }
     }
-    //printk("apply result = %d\r\n", res);
 
     if (res == 0) {
         res = detools_apply_patch_finalize(apply_patch_p);

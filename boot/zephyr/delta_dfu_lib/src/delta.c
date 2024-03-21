@@ -255,16 +255,20 @@ static int apply_flash_write(void *arg_p,
 		return -DELTA_WRITING_ERROR;
 	}
 
-#ifdef DELTA_ENABLE_LOG
-	printk("to_flash write size 0x%x to %p\r\n\n", size,flash->to_current + flash->write_size);
-#endif
+
 	memcpy(to_flash_buf + flash->write_size, buf_p, size);  //put the TO content to a temp buffer first
 	flash->write_size += size;
-	
+
 	if (flash->write_size >= ERASE_PAGE_SIZE) {
+	#ifdef DELTA_ENABLE_LOG
+		printk("Start to_flash write size 0x%x to %p at %" PRIu32 "\r\n\n",flash->write_size,flash->to_current + flash->write_size,k_uptime_get_32());
+	#endif
 		apply_backup_write_status(flash);
 		flush_patch_status(&apply_patch,flash);	
 		write_new_image_to_flash(flash);
+	#ifdef DELTA_ENABLE_LOG
+		printk("End to_flash write to %p at %" PRIu32 "\r\n\n",flash->to_current + flash->write_size,k_uptime_get_32());
+	#endif
 	}
 
 	return DELTA_OK;

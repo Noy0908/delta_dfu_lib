@@ -389,10 +389,10 @@ boot_move_sector_up_pages(int idx, uint32_t sz, uint8_t pages, struct boot_loade
 
     rc = boot_erase_region(fap_pri, new_off, sz);
     assert(rc == 0);
-
+    // BOOT_LOG_INF("============Start sector move up at %" PRIu32 "\n", k_uptime_get_32());
     rc = boot_copy_region(state, fap_pri, fap_pri, old_off, new_off, sz);
     assert(rc == 0);
-
+    // BOOT_LOG_INF("============Start sector move up at %" PRIu32 "\n", k_uptime_get_32());
     rc = boot_write_status(state, bs);
 
     bs->idx++;
@@ -596,11 +596,12 @@ swap_run(struct boot_loader_state *state, struct boot_status *bs,
     int rc;
 
     BOOT_LOG_INF("Starting swap using move algorithm.");
-    BOOT_LOG_INF("============Start Delta DFU at %" PRIu32 "\n", k_uptime_get_32());
 
     last_idx = find_last_idx(state, copy_size);
     sector_sz = boot_img_sector_size(state, BOOT_PRIMARY_SLOT, 0);
-
+#ifdef MCUBOOT_DELTA_UPGRADE
+    BOOT_LOG_INF("last_idx=%d\t sector_sz=%d\t Start Delta DFU at %" PRIu32 "\n", last_idx,sector_sz,k_uptime_get_32());
+#endif
     /*
      * When starting a new swap upgrade, check that there is enough space.
      */
@@ -699,8 +700,9 @@ swap_run(struct boot_loader_state *state, struct boot_status *bs,
 
 #else
 
+    BOOT_LOG_INF("============Start sector move up at %" PRIu32 "\n", k_uptime_get_32());
 /** move up source image move_up_pages pages */
-     if (bs->op == BOOT_STATUS_OP_MOVE) {
+    if (bs->op == BOOT_STATUS_OP_MOVE) {
         idx = last_idx;
         while (idx > 0) {
             if (idx <= (last_idx - bs->idx + 1)) {
@@ -711,6 +713,7 @@ swap_run(struct boot_loader_state *state, struct boot_status *bs,
         bs->idx = BOOT_STATUS_IDX_0;
         bs->op = BOOT_STATUS_OP_APPLY;
     }
+    BOOT_LOG_INF("============End sector move up at %" PRIu32 "\n", k_uptime_get_32());
 
     struct flash_mem flash_pt = {0};
     /** This step try to find the old image pages which will be used after be erased*/
