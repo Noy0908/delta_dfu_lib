@@ -700,7 +700,7 @@ swap_run(struct boot_loader_state *state, struct boot_status *bs,
 
 #else
 
-    BOOT_LOG_INF("============Start sector move up at %" PRIu32 "\n", k_uptime_get_32());
+    // BOOT_LOG_INF("============Start sector move up at %" PRIu32 "\n", k_uptime_get_32());
 /** move up source image move_up_pages pages */
     if (bs->op == BOOT_STATUS_OP_MOVE) {
         idx = last_idx;
@@ -713,7 +713,7 @@ swap_run(struct boot_loader_state *state, struct boot_status *bs,
         bs->idx = BOOT_STATUS_IDX_0;
         bs->op = BOOT_STATUS_OP_APPLY;
     }
-    BOOT_LOG_INF("============End sector move up at %" PRIu32 "\n", k_uptime_get_32());
+    // BOOT_LOG_INF("============End sector move up at %" PRIu32 "\n", k_uptime_get_32());
 
     struct flash_mem flash_pt = {0};
     /** This step try to find the old image pages which will be used after be erased*/
@@ -729,21 +729,21 @@ swap_run(struct boot_loader_state *state, struct boot_status *bs,
             goto restore;
         }     
     }
-    BOOT_LOG_INF("============Traverse end at %" PRIu32 "\n", k_uptime_get_32());
+    // BOOT_LOG_INF("============Traverse end at %" PRIu32 "\n", k_uptime_get_32());
     /** Now we start to apply patch file to create new image*/
     if(opFlag == DELTA_OP_APPLY)
     { 
     #ifdef MCUBOOT_WRITE_STATUS_DYNAMIC
         status_address = get_status_address();
     #endif
-    /**just for test*/
+
         rc = apply_read_status(&flash_pt); 
         if (rc < 0) {
             bs->op = BOOT_STATUS_OP_RESTORE;
             goto restore;
         }  
 
-        printf("##Now start applying patch file!!!\r\n");
+        // printf("##Now start applying patch file!!!\r\n");
 
         rc = delta_apply_init(&flash_pt,patch_size,&apply_patch);
         if (rc < 0) {
