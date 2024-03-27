@@ -363,72 +363,27 @@ zephyr_library_sources(
 )
 endif()
 
+
+
 # support application delta dfu
 if(DEFINED CONFIG_BOOT_UPGRADE_APP_DELTA)
-  # The external static library that we are linking with does not know
-  # how to build for this platform so we export all the flags used in
-  # this zephyr build to the external build system.
-  #
-  # Other external build systems may be self-contained enough that they
-  # do not need any build information from zephyr. Or they may be
-  # incompatible with certain zephyr options and need them to be
-  # filtered out.
-  zephyr_get_include_directories_for_lang_as_string(       C includes)
-  zephyr_get_system_include_directories_for_lang_as_string(C system_includes)
-  zephyr_get_compile_definitions_for_lang_as_string(       C definitions)
-  zephyr_get_compile_options_for_lang_as_string(           C options)
-
-  set(external_project_cflags
-  "${includes} ${definitions} ${options} ${system_includes}"
-  )
-
-  include(ExternalProject)
-
   # Add an external project to be able download and build the third
   # party library. In this case downloading is not necessary as it has
   # been committed to the repository.
-  set(deltalib_dir  ${BOOT_DIR}/zephyr/delta_dfu_lib)
-  set(deltalib_build_dir ${deltalib_dir}/build)
-
-
-  set(DELTALIB_LIB_DIR     ${deltalib_build_dir}/lib)
-  set(DELTALIB_INCLUDE_DIR ${deltalib_dir}/include)
-
-  if(CMAKE_GENERATOR STREQUAL "Unix Makefiles")
-  # https://www.gnu.org/software/make/manual/html_node/MAKE-Variable.html
-  set(submake "$(MAKE)")
-  else() # Obviously no MAKEFLAGS. Let's hope a "make" can be found somewhere.
-  set(submake "make")
-  endif()
-
-  ExternalProject_Add(
-    delta_dfu                 # Name for custom target
-    PREFIX     ${deltalib_build_dir} # Root dir for entire project
-    SOURCE_DIR ${deltalib_dir}
-    BINARY_DIR ${deltalib_dir} # This particular build system is invoked from the root
-    CONFIGURE_COMMAND ""    # Skip configuring the project, e.g. with autoconf
-    BUILD_COMMAND
-    ${submake}
-    PREFIX=${deltalib_build_dir}
-    CC=${CMAKE_C_COMPILER}
-    AR=${CMAKE_AR}
-    CFLAGS=${external_project_cflags}
-    INSTALL_COMMAND ""      # This particular build system has no install command
-    BUILD_BYPRODUCTS ${DELTALIB_LIB_DIR}/delta_lib.a
-  )
+  set(DELTALIB_LIB_DIR  ${BOOT_DIR}/zephyr/delta_dfu_lib)
+  set(DELTALIB_INCLUDE_DIR ${DELTALIB_LIB_DIR}/include)
 
   # Create a wrapper CMake library that our app can link with
   add_library(delta_lib STATIC IMPORTED GLOBAL)
-  add_dependencies(
-    delta_lib
-    delta_dfu
-    )
+
   set_target_properties(delta_lib PROPERTIES IMPORTED_LOCATION             ${DELTALIB_LIB_DIR}/delta_lib.a)
   set_target_properties(delta_lib PROPERTIES INTERFACE_INCLUDE_DIRECTORIES ${DELTALIB_INCLUDE_DIR})
 
   target_link_libraries(app PUBLIC delta_lib)
 
 endif()
+
+
 
 if(SYSBUILD AND CONFIG_PCD_APP)
     # Sysbuild requires details of the RAM flash device are stored to the cache of MCUboot so
