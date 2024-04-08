@@ -1,0 +1,15 @@
+C:/NCS_SDK/v2.5.0/bootloader/mcuboot/boot/zephyr/delta_dfu_lib/build/obj/heatshrink.o: \
+ src/heatshrink_decoder.c \
+ C:/Work/git/delta_dfu/build_52840/mcuboot/zephyr/include/generated/autoconf.h \
+ C:/NCS_SDK/v2.5.0/zephyr/include/zephyr/toolchain/zephyr_stdint.h \
+ C:/NCS_SDK/v2.5.0/zephyr/lib/libc/minimal/include/stdlib.h \
+ c:\ncs_sdk\toolchains\c57af46cb7\opt\zephyr-sdk\arm-zephyr-eabi\lib\gcc\arm-zephyr-eabi\12.2.0\include\stddef.h \
+ C:/NCS_SDK/v2.5.0/zephyr/lib/libc/minimal/include/limits.h \
+ C:/NCS_SDK/v2.5.0/zephyr/lib/libc/minimal/include/string.h \
+ C:/NCS_SDK/v2.5.0/zephyr/include/zephyr/toolchain.h \
+ C:/NCS_SDK/v2.5.0/zephyr/include/zephyr/toolchain/gcc.h \
+ C:/NCS_SDK/v2.5.0/zephyr/include/zephyr/toolchain/common.h \
+ C:/NCS_SDK/v2.5.0/zephyr/lib/libc/minimal/include/stdbool.h \
+ src/../include/heatshrink_decoder.h \
+ C:/NCS_SDK/v2.5.0/zephyr/lib/libc/minimal/include/stdint.h \
+ src/../include/heatshrink_common.h src/../include/heatshrink_config.h
