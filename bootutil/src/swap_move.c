@@ -327,51 +327,7 @@ swap_status_source(struct boot_loader_state *state)
     return BOOT_STATUS_SOURCE_NONE;
 }
 
-/*
- * "Moves" the sector located at idx - 1 to idx.
- */
-static void
-boot_move_sector_up(int idx, uint32_t sz, struct boot_loader_state *state,
-        struct boot_status *bs, const struct flash_area *fap_pri,
-        const struct flash_area *fap_sec)
-{
-    uint32_t new_off;
-    uint32_t old_off;
-    int rc;
 
-    /*
-     * FIXME: assuming sectors of size == sz, a single off variable
-     * would be enough
-     */
-
-    /* Calculate offset from start of image area. */
-    new_off = boot_img_sector_off(state, BOOT_PRIMARY_SLOT, idx);
-    old_off = boot_img_sector_off(state, BOOT_PRIMARY_SLOT, idx - 1);
-
-    if (bs->idx == BOOT_STATUS_IDX_0) {
-        if (bs->source != BOOT_STATUS_SOURCE_PRIMARY_SLOT) {
-            rc = swap_erase_trailer_sectors(state, fap_pri);
-            assert(rc == 0);
-
-            rc = swap_status_init(state, fap_pri, bs);
-            assert(rc == 0);
-        }
-
-        rc = swap_erase_trailer_sectors(state, fap_sec);
-        assert(rc == 0);
-    }
-
-    rc = boot_erase_region(fap_pri, new_off, sz);
-    assert(rc == 0);
-
-    rc = boot_copy_region(state, fap_pri, fap_pri, old_off, new_off, sz);
-    assert(rc == 0);
-
-    rc = boot_write_status(state, bs);
-
-    bs->idx++;
-    BOOT_STATUS_ASSERT(rc == 0);
-}
 
 
 #ifdef MCUBOOT_DELTA_UPGRADE
@@ -461,7 +417,7 @@ boot_move_sector_down_pages(int idx, uint32_t sz, uint8_t pages, struct boot_loa
     bs->idx++;
     BOOT_STATUS_ASSERT(rc == 0);
 }
-#endif
+#else
 
 static void
 boot_swap_sectors(int idx, uint32_t sz, struct boot_loader_state *state,
@@ -502,6 +458,54 @@ boot_swap_sectors(int idx, uint32_t sz, struct boot_loader_state *state,
         BOOT_STATUS_ASSERT(rc == 0);
     }
 }
+
+/*
+ * "Moves" the sector located at idx - 1 to idx.
+ */
+static void
+boot_move_sector_up(int idx, uint32_t sz, struct boot_loader_state *state,
+        struct boot_status *bs, const struct flash_area *fap_pri,
+        const struct flash_area *fap_sec)
+{
+    uint32_t new_off;
+    uint32_t old_off;
+    int rc;
+
+    /*
+     * FIXME: assuming sectors of size == sz, a single off variable
+     * would be enough
+     */
+
+    /* Calculate offset from start of image area. */
+    new_off = boot_img_sector_off(state, BOOT_PRIMARY_SLOT, idx);
+    old_off = boot_img_sector_off(state, BOOT_PRIMARY_SLOT, idx - 1);
+
+    if (bs->idx == BOOT_STATUS_IDX_0) {
+        if (bs->source != BOOT_STATUS_SOURCE_PRIMARY_SLOT) {
+            rc = swap_erase_trailer_sectors(state, fap_pri);
+            assert(rc == 0);
+
+            rc = swap_status_init(state, fap_pri, bs);
+            assert(rc == 0);
+        }
+
+        rc = swap_erase_trailer_sectors(state, fap_sec);
+        assert(rc == 0);
+    }
+
+    rc = boot_erase_region(fap_pri, new_off, sz);
+    assert(rc == 0);
+
+    rc = boot_copy_region(state, fap_pri, fap_pri, old_off, new_off, sz);
+    assert(rc == 0);
+
+    rc = boot_write_status(state, bs);
+
+    bs->idx++;
+    BOOT_STATUS_ASSERT(rc == 0);
+}
+
+#endif
 
 
 /*

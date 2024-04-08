@@ -783,7 +783,7 @@ boot_validate_slot(struct boot_loader_state *state, int slot,
     if (fih_eq(fih_rc, fih_int_encode(BOOT_HOOK_REGULAR)))
     {
         FIH_CALL(boot_image_check, fih_rc, state, hdr, fap, bs);
-        printf("slot=%d\n",slot);
+        // printf("slot=%d\n",slot);
         // if(slot == BOOT_PRIMARY_SLOT)
         // {
         //     for(int i = 0; i < sizeof(out_hash); i++)
@@ -2175,7 +2175,7 @@ context_boot_go(struct boot_loader_state *state, struct boot_rsp *rsp)
 
         /* Set the previously determined swap type */
         bs.swap_type = BOOT_SWAP_TYPE(state);
-        printk("swap_type = %d\r\n",bs.swap_type);
+        // printf("swap_type = %d\r\n",bs.swap_type);
         switch (BOOT_SWAP_TYPE(state)) {
         case BOOT_SWAP_TYPE_NONE:
             break;

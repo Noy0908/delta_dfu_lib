@@ -25,6 +25,7 @@
 #define PRIMARY_SIZE 				FLASH_AREA_SIZE(image_0)
 #define SECONDARY_OFFSET 			FLASH_AREA_OFFSET(image_1)
 #define SECONDARY_SIZE 				FLASH_AREA_SIZE(image_1)
+#define MCUBOOT_PAD_SIZE 			FLASH_AREA_SIZE(mcuboot_pad)
 
 /* PAGE SIZE */
 #define PAGE_SIZE 					0x1000

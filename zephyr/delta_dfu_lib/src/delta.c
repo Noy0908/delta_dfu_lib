@@ -46,8 +46,8 @@ static int delta_init_flash_mem(struct flash_mem *flash)
 
 	flash->erased_addr = PRIMARY_OFFSET;
 
-	flash->patch_current = SECONDARY_OFFSET + 0x200 + HEADER_SIZE;
-	flash->patch_end = flash->patch_current + SECONDARY_SIZE - HEADER_SIZE - 0x200 - PAGE_SIZE;
+	flash->patch_current = SECONDARY_OFFSET + MCUBOOT_PAD_SIZE + HEADER_SIZE;
+	flash->patch_end = flash->patch_current + SECONDARY_SIZE - HEADER_SIZE - MCUBOOT_PAD_SIZE - PAGE_SIZE;
 
 	flash->write_size = 0;
 
@@ -55,8 +55,8 @@ static int delta_init_flash_mem(struct flash_mem *flash)
 
 	image_position_adjust.count = 0;
 
-	printf("\nInit: from_current=0X%X to_current=0X%X patch_current=0X%X STATUS_ADDRESS=0X%X backup_addr=0x%X\t write_size=%d\n",
-			flash->from_current, flash->to_current, flash->patch_current,status_address,flash->backup_addr, flash->write_size);
+	// printf("\nInit: from_current=0X%X to_current=0X%X patch_current=0X%X STATUS_ADDRESS=0X%X backup_addr=0x%X\t write_size=%d\n",
+	// 		flash->from_current, flash->to_current, flash->patch_current,status_address,flash->backup_addr, flash->write_size);
 
 	return DELTA_OK;
 }
@@ -96,14 +96,14 @@ static int save_backup_image(void *arg_p)
 	printk("==== total_count=%d\t totat_size=%d\r\n", image_position_adjust.count,total_size);
 
 #ifdef MCUBOOT_WRITE_STATUS_DYNAMIC
-	uint32_t patch_len= patch_size + 0x200 + HEADER_SIZE + PAGE_SIZE - (patch_size + 0x200 + HEADER_SIZE)%PAGE_SIZE;
+	uint32_t patch_len= patch_size + MCUBOOT_PAD_SIZE + HEADER_SIZE + PAGE_SIZE - (patch_size + MCUBOOT_PAD_SIZE + HEADER_SIZE)%PAGE_SIZE;
 	if ((patch_len + total_size) > SECONDARY_SIZE - PAGE_SIZE) 
 #else
 	if((status_address + 4*PAGE_SIZE + total_size) > (SECONDARY_OFFSET + SECONDARY_SIZE - PAGE_SIZE))		//4 pages to save status pages + the last 1 page reserve
 #endif
 	{
 		printk("## The delta file has a big variation!");
-		return DELTA_WRITING_ERROR;
+		return -DELTA_WRITING_ERROR;
 	}
 
 	for (i = 1; i <= (total_size/PAGE_SIZE + 1); i++)
@@ -141,7 +141,7 @@ static int save_backup_image(void *arg_p)
 
 	flash_erase(flash_device, status_address, PAGE_SIZE*3);			//clean backup information
 
-	if (flash_write(flash_device, SECONDARY_OFFSET + 0x200, &opFlag, sizeof(opFlag))) {
+	if (flash_write(flash_device, SECONDARY_OFFSET + MCUBOOT_PAD_SIZE, &opFlag, sizeof(opFlag))) {
 		return -DELTA_PATCH_HEADER_ERROR;
 	}
 
@@ -185,19 +185,19 @@ static int apply_last_buffer(void *arg_p)
 	struct flash_mem *flash = (struct flash_mem *)arg_p;
 	uint32_t opFlag = DELTA_OP_APPLY;	
 
-	printk("===== Apply last Flash buffer\r");
+	// printk("===== Apply last Flash buffer\r");
 	if (flash_erase(flash_device, flash->to_current, ERASE_PAGE_SIZE)) {
 		return -DELTA_CLEARING_ERROR;
 	}
 	if (flash_write(flash_device, flash->to_current, to_flash_buf, flash->write_size)) {
-		printk("flash write err\r");
+		printk("flash write err\r\n");
 		return -DELTA_WRITING_ERROR;
 	}
 
 	flash->to_current += flash->write_size;
 	flash->write_size = 0;	
 
-	if (flash_write(flash_device, SECONDARY_OFFSET + 0x200, &opFlag, sizeof(opFlag))) {
+	if (flash_write(flash_device, SECONDARY_OFFSET + MCUBOOT_PAD_SIZE, &opFlag, sizeof(opFlag))) {
 		return -DELTA_PATCH_HEADER_ERROR;
 	}			
 
@@ -541,7 +541,7 @@ int delta_apply_init(struct flash_mem *flash,uint32_t patch_size,struct detools_
 {
 	int ret = -1;
 	uint8_t chunk[512];
-	off_t start_addr = SECONDARY_OFFSET + 0x200 + HEADER_SIZE;
+	off_t start_addr = SECONDARY_OFFSET + MCUBOOT_PAD_SIZE + HEADER_SIZE;
 
 	ret = detools_apply_patch_init(apply_patch,
                                    apply_flash_from_read,
@@ -571,8 +571,8 @@ int traverse_delta_file(struct flash_mem *flash, struct detools_apply_patch_t *a
 		return ret;
 	}
 #ifndef DELTA_ENABLE_LOG
-	printf("\nTraverse: from_current=0X%X\t size=0x%X\t to_current=0X%X\t size=0x%X\t patch_current=0X%X\t patch_end=0X%X\t backup_addr=0x%X\n",
-		flash->from_current,PRIMARY_SIZE,flash->to_current,SECONDARY_SIZE,flash->patch_current,flash->patch_end, flash->backup_addr);
+	printf("\nTraverse: mcuboot_pad=0X%X\t from_current=0X%X\t size=0x%X\t to_current=0X%X\t size=0x%X\t patch_current=0X%X\t patch_end=0X%X\t backup_addr=0X%X\n",
+		MCUBOOT_PAD_SIZE,flash->from_current,PRIMARY_SIZE,flash->to_current,SECONDARY_SIZE,flash->patch_current,flash->patch_end, flash->backup_addr);
 #endif
 	ret = apply_patch_process(apply_patch, delta_flash_patch_read, patch_size, 0, flash);
 	
@@ -584,7 +584,7 @@ int delta_check_and_apply(struct flash_mem *flash, struct detools_apply_patch_t 
 {
 	int ret;
 
-	size_t patch_offset = flash->patch_current - (SECONDARY_OFFSET + 0x200 + HEADER_SIZE);
+	size_t patch_offset = flash->patch_current - (SECONDARY_OFFSET + MCUBOOT_PAD_SIZE + HEADER_SIZE);
 	ret = apply_patch_process(apply_patch, delta_flash_patch_read, patch_size, patch_offset, flash);
 
 	return ret;
@@ -601,7 +601,7 @@ int delta_read_patch_header(uint8_t *hash_buf, uint32_t *size, uint8_t *op)
 	} header_st;
 
 
-	if (flash_read(flash_device, SECONDARY_OFFSET + 0x200, &header_st, sizeof(header_st))) {
+	if (flash_read(flash_device, SECONDARY_OFFSET + MCUBOOT_PAD_SIZE, &header_st, sizeof(header_st))) {
 		return -DELTA_PATCH_HEADER_ERROR;
 	}
 #ifdef DELTA_ENABLE_LOG
@@ -619,7 +619,7 @@ int delta_read_patch_header(uint8_t *hash_buf, uint32_t *size, uint8_t *op)
 			*op = DELTA_OP_TRAVERSE;
 
 			uint32_t opFlag = DELTA_OP_START;
-			if (flash_write(flash_device, SECONDARY_OFFSET + 0x200, &opFlag, sizeof(opFlag))) {
+			if (flash_write(flash_device, SECONDARY_OFFSET + MCUBOOT_PAD_SIZE, &opFlag, sizeof(opFlag))) {
 				return -DELTA_PATCH_HEADER_ERROR;
 			}
 
@@ -646,7 +646,7 @@ int delta_read_patch_header(uint8_t *hash_buf, uint32_t *size, uint8_t *op)
 
 	*size = header_st.length;
 #ifndef MCUBOOT_WRITE_STATUS_DYNAMIC
-	status_address = SECONDARY_OFFSET + 0x200 + HEADER_SIZE + *size + PAGE_SIZE - (SECONDARY_OFFSET + 0x200 + HEADER_SIZE + *size)%PAGE_SIZE;
+	status_address = SECONDARY_OFFSET + MCUBOOT_PAD_SIZE + HEADER_SIZE + *size + PAGE_SIZE - (SECONDARY_OFFSET + MCUBOOT_PAD_SIZE + HEADER_SIZE + *size)%PAGE_SIZE;
 #endif
 	return DELTA_OK;
 }
