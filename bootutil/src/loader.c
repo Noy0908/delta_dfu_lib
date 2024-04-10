@@ -2050,8 +2050,12 @@ fih_int get_source_hash(const struct flash_area *fap,uint8_t *hash_buf)
 {
     struct image_header hdr;
     uint8_t tmpbuf[64];
+    fih_int fih_rc = FIH_FAILURE;
+
     flash_area_read(fap, 0, &hdr, sizeof(hdr));
-    return (bootutil_img_validate(NULL, 0, &hdr, fap, tmpbuf, sizeof(tmpbuf),NULL, 0, hash_buf));
+    // return (bootutil_img_validate(NULL, 0, &hdr, fap, tmpbuf, sizeof(tmpbuf),NULL, 0, hash_buf));
+    FIH_CALL(bootutil_img_validate, fih_rc, NULL, 0, &hdr, fap, tmpbuf, sizeof(tmpbuf), NULL, 0, hash_buf);
+    return fih_rc;
 }
 
 fih_int
@@ -3353,6 +3357,7 @@ boot_go(struct boot_rsp *rsp)
     boot_state_clear(NULL);
 
     FIH_CALL(context_boot_go, fih_rc, &boot_data, rsp);
+
     FIH_RET(fih_rc);
 }
 
