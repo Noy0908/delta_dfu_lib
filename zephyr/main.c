@@ -662,6 +662,7 @@ int main(void)
 
     FIH_CALL(boot_go, fih_rc, &rsp);
 
+
 #ifdef CONFIG_BOOT_SERIAL_BOOT_MODE
     boot_mode = bootmode_check(BOOT_MODE_TYPE_BOOTLOADER);
 

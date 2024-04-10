@@ -1,6 +1,6 @@
 C:/NCS_SDK/v2.5.0/bootloader/mcuboot/boot/zephyr/delta_dfu_lib/build/obj/detools.o: \
  src/detools.c \
- C:/Work/git/delta_dfu/build_52840/mcuboot/zephyr/include/generated/autoconf.h \
+ C:/Work/git/delta_dfu/build_9160/mcuboot/zephyr/include/generated/autoconf.h \
  C:/NCS_SDK/v2.5.0/zephyr/include/zephyr/toolchain/zephyr_stdint.h \
  C:/NCS_SDK/v2.5.0/zephyr/lib/libc/minimal/include/stdlib.h \
  c:\ncs_sdk\toolchains\c57af46cb7\opt\zephyr-sdk\arm-zephyr-eabi\lib\gcc\arm-zephyr-eabi\12.2.0\include\stddef.h \
@@ -43,7 +43,7 @@ C:/NCS_SDK/v2.5.0/bootloader/mcuboot/boot/zephyr/delta_dfu_lib/build/obj/detools
  C:/NCS_SDK/v2.5.0/zephyr/include/zephyr/kernel/mempool_heap.h \
  C:/NCS_SDK/v2.5.0/zephyr/include/zephyr/kernel_version.h \
  C:/NCS_SDK/v2.5.0/zephyr/include/zephyr/syscall.h \
- C:/Work/git/delta_dfu/build_52840/mcuboot/zephyr/include/generated/syscall_list.h \
+ C:/Work/git/delta_dfu/build_9160/mcuboot/zephyr/include/generated/syscall_list.h \
  C:/NCS_SDK/v2.5.0/zephyr/include/zephyr/arch/syscall.h \
  C:/NCS_SDK/v2.5.0/zephyr/include/zephyr/arch/arm/aarch32/syscall.h \
  C:/NCS_SDK/v2.5.0/zephyr/include/zephyr/sys/printk.h \
@@ -55,7 +55,7 @@ C:/NCS_SDK/v2.5.0/bootloader/mcuboot/boot/zephyr/delta_dfu_lib/build/obj/detools
  C:/NCS_SDK/v2.5.0/zephyr/include/zephyr/arch/arm/aarch32/arch_inlines.h \
  C:/NCS_SDK/v2.5.0/zephyr/include/zephyr/arch/arm/aarch32/arch.h \
  C:/NCS_SDK/v2.5.0/zephyr/include/zephyr/devicetree.h \
- C:/Work/git/delta_dfu/build_52840/mcuboot/zephyr/include/generated/devicetree_generated.h \
+ C:/Work/git/delta_dfu/build_9160/mcuboot/zephyr/include/generated/devicetree_generated.h \
  C:/NCS_SDK/v2.5.0/zephyr/include/zephyr/devicetree/io-channels.h \
  C:/NCS_SDK/v2.5.0/zephyr/include/zephyr/devicetree/clocks.h \
  C:/NCS_SDK/v2.5.0/zephyr/include/zephyr/devicetree/gpio.h \
@@ -88,72 +88,38 @@ C:/NCS_SDK/v2.5.0/bootloader/mcuboot/boot/zephyr/delta_dfu_lib/build/obj/detools
  C:/NCS_SDK/v2.5.0/zephyr/include/zephyr/arch/arm/aarch32/cortex_m/memory_map.h \
  C:/NCS_SDK/v2.5.0/zephyr/include/zephyr/arch/common/sys_io.h \
  C:/NCS_SDK/v2.5.0/zephyr/include/zephyr/fatal_types.h \
- C:/NCS_SDK/v2.5.0/zephyr/include/zephyr/arch/arm/aarch32/mpu/arm_mpu.h \
- C:/NCS_SDK/v2.5.0/zephyr/include/zephyr/arch/arm/aarch32/mpu/arm_mpu_v7m.h \
- c:\ncs_sdk\v2.5.0\zephyr\modules\cmsis\cmsis_core.h \
- c:\ncs_sdk\v2.5.0\zephyr\modules\cmsis\cmsis_core_m.h \
- C:/NCS_SDK/v2.5.0/zephyr/soc/arm/nordic_nrf/nrf52/soc.h \
- c:\ncs_sdk\v2.5.0\zephyr\soc\arm\nordic_nrf\common\soc_nrf_common.h \
- C:/NCS_SDK/v2.5.0/modules/hal/nordic/nrfx/nrfx.h \
- c:\ncs_sdk\v2.5.0\zephyr\modules\hal_nordic\nrfx\nrfx_config.h \
- c:\ncs_sdk\v2.5.0\zephyr\modules\hal_nordic\nrfx\nrfx_config_common.h \
- c:\ncs_sdk\v2.5.0\zephyr\modules\hal_nordic\nrfx\nrfx_config_nrf52840.h \
- C:/NCS_SDK/v2.5.0/modules/hal/nordic/nrfx/drivers/nrfx_common.h \
- C:/NCS_SDK/v2.5.0/modules/hal/nordic/nrfx/mdk/nrf.h \
- C:/NCS_SDK/v2.5.0/modules/hal/nordic/nrfx/mdk/nrf52840.h \
- C:/NCS_SDK/v2.5.0/modules/hal/cmsis/CMSIS/Core/Include/core_cm4.h \
- C:/NCS_SDK/v2.5.0/modules/hal/cmsis/CMSIS/Core/Include/cmsis_version.h \
- C:/NCS_SDK/v2.5.0/modules/hal/cmsis/CMSIS/Core/Include/cmsis_compiler.h \
- C:/NCS_SDK/v2.5.0/modules/hal/cmsis/CMSIS/Core/Include/cmsis_gcc.h \
- C:/NCS_SDK/v2.5.0/modules/hal/cmsis/CMSIS/Core/Include/mpu_armv7.h \
- C:/NCS_SDK/v2.5.0/modules/hal/nordic/nrfx/mdk/system_nrf52840.h \
- C:/NCS_SDK/v2.5.0/modules/hal/nordic/nrfx/mdk/nrf52840_bitfields.h \
- C:/NCS_SDK/v2.5.0/modules/hal/nordic/nrfx/mdk/nrf51_to_nrf52840.h \
- C:/NCS_SDK/v2.5.0/modules/hal/nordic/nrfx/mdk/nrf52_to_nrf52840.h \
- C:/NCS_SDK/v2.5.0/modules/hal/nordic/nrfx/mdk/compiler_abstraction.h \
- C:/NCS_SDK/v2.5.0/modules/hal/nordic/nrfx/drivers/nrfx_utils.h \
- C:/NCS_SDK/v2.5.0/modules/hal/nordic/nrfx/drivers/nrfx_utils_internal.h \
- C:/NCS_SDK/v2.5.0/modules/hal/nordic/nrfx/mdk/nrf_peripherals.h \
- C:/NCS_SDK/v2.5.0/modules/hal/nordic/nrfx/mdk/nrf52840_peripherals.h \
- C:/NCS_SDK/v2.5.0/modules/hal/nordic/nrfx/mdk/nrf_mem.h \
- C:/NCS_SDK/v2.5.0/modules/hal/nordic/nrfx/mdk/nrf52840_xxaa_memory.h \
- C:/NCS_SDK/v2.5.0/modules/hal/nordic/nrfx/drivers/nrfx_ext.h \
- c:\ncs_sdk\v2.5.0\zephyr\modules\hal_nordic\nrfx\nrfx_glue.h \
- C:/NCS_SDK/v2.5.0/zephyr/include/zephyr/irq.h \
- C:/NCS_SDK/v2.5.0/modules/hal/nordic/nrfx/hal/nrf_common.h \
- C:/NCS_SDK/v2.5.0/modules/hal/nordic/nrfx/haly/nrfy_common.h \
- C:/NCS_SDK/v2.5.0/modules/hal/nordic/nrfx/drivers/nrfx_errors.h \
  C:/NCS_SDK/v2.5.0/zephyr/include/zephyr/sys_clock.h \
  C:/NCS_SDK/v2.5.0/zephyr/include/zephyr/spinlock.h \
  C:/NCS_SDK/v2.5.0/zephyr/lib/libc/minimal/include/errno.h \
  C:/NCS_SDK/v2.5.0/zephyr/include/zephyr/sys/errno_private.h \
- C:/Work/git/delta_dfu/build_52840/mcuboot/zephyr/include/generated/syscalls/errno_private.h \
+ C:/Work/git/delta_dfu/build_9160/mcuboot/zephyr/include/generated/syscalls/errno_private.h \
  C:/NCS_SDK/v2.5.0/zephyr/include/zephyr/fatal.h \
+ C:/NCS_SDK/v2.5.0/zephyr/include/zephyr/irq.h \
  C:/NCS_SDK/v2.5.0/zephyr/include/zephyr/kernel/thread_stack.h \
  C:/NCS_SDK/v2.5.0/zephyr/include/zephyr/app_memory/mem_domain.h \
  C:/NCS_SDK/v2.5.0/zephyr/include/zephyr/kernel/thread.h \
  C:/NCS_SDK/v2.5.0/zephyr/include/zephyr/sys/kobject.h \
  C:/NCS_SDK/v2.5.0/zephyr/include/zephyr/sys/iterable_sections.h \
- C:/Work/git/delta_dfu/build_52840/mcuboot/zephyr/include/generated/kobj-types-enum.h \
- C:/Work/git/delta_dfu/build_52840/mcuboot/zephyr/include/generated/syscalls/kobject.h \
+ C:/Work/git/delta_dfu/build_9160/mcuboot/zephyr/include/generated/kobj-types-enum.h \
+ C:/Work/git/delta_dfu/build_9160/mcuboot/zephyr/include/generated/syscalls/kobject.h \
  C:/NCS_SDK/v2.5.0/zephyr/include/zephyr/tracing/tracing_syscall.h \
  C:/NCS_SDK/v2.5.0/zephyr/include/zephyr/tracing/tracing_macros.h \
  C:/NCS_SDK/v2.5.0/zephyr/include/zephyr/tracing/tracing.h \
  C:/NCS_SDK/v2.5.0/zephyr/include/zephyr/tracing/tracking.h \
- C:/Work/git/delta_dfu/build_52840/mcuboot/zephyr/include/generated/syscalls/kernel.h \
+ C:/Work/git/delta_dfu/build_9160/mcuboot/zephyr/include/generated/syscalls/kernel.h \
  C:/NCS_SDK/v2.5.0/zephyr/include/zephyr/device.h \
  C:/NCS_SDK/v2.5.0/zephyr/include/zephyr/init.h \
  C:/NCS_SDK/v2.5.0/zephyr/include/zephyr/sys/device_mmio.h \
  C:/NCS_SDK/v2.5.0/zephyr/include/zephyr/sys/mem_manage.h \
- C:/Work/git/delta_dfu/build_52840/mcuboot/zephyr/include/generated/syscalls/mem_manage.h \
- C:/Work/git/delta_dfu/build_52840/mcuboot/zephyr/include/generated/syscalls/device.h \
+ C:/Work/git/delta_dfu/build_9160/mcuboot/zephyr/include/generated/syscalls/mem_manage.h \
+ C:/Work/git/delta_dfu/build_9160/mcuboot/zephyr/include/generated/syscalls/device.h \
  C:/NCS_SDK/v2.5.0/zephyr/include/zephyr/drivers/flash.h \
  C:/NCS_SDK/v2.5.0/zephyr/lib/libc/minimal/include/sys/types.h \
  C:/NCS_SDK/v2.5.0/zephyr/lib/libc/minimal/include/sys/_types.h \
- C:/Work/git/delta_dfu/build_52840/mcuboot/zephyr/include/generated/syscalls/flash.h \
+ C:/Work/git/delta_dfu/build_9160/mcuboot/zephyr/include/generated/syscalls/flash.h \
  C:/NCS_SDK/v2.5.0/zephyr/include/zephyr/storage/flash_map.h \
  C:/NCS_SDK/v2.5.0/nrf/include/flash_map_pm.h \
- C:/Work/git/delta_dfu/build_52840/mcuboot/zephyr/include/generated/pm_config.h \
+ C:/Work/git/delta_dfu/build_9160/mcuboot/zephyr/include/generated/pm_config.h \
  C:/NCS_SDK/v2.5.0/zephyr/include/zephyr/dfu/mcuboot.h \
  C:/NCS_SDK/v2.5.0/zephyr/include/zephyr/sys/reboot.h \
  src/../include/detools.h

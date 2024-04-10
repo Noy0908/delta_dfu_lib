@@ -1750,6 +1750,7 @@ boot_perform_update(struct boot_loader_state *state, struct boot_status *bs)
      * swap was finished to avoid a new revert.
      */
     swap_type = BOOT_SWAP_TYPE(state);
+    printf("swap_type = %d\r\n", swap_type);
     if (swap_type == BOOT_SWAP_TYPE_REVERT ||
             swap_type == BOOT_SWAP_TYPE_PERM) {
         rc = swap_set_image_ok(BOOT_CURR_IMG(state));
@@ -2127,8 +2128,13 @@ fih_int get_source_hash(const struct flash_area *fap,uint8_t *hash_buf)
 {
     struct image_header hdr;
     uint8_t tmpbuf[64];
+    FIH_DECLARE(fih_rc, FIH_FAILURE);
+
     flash_area_read(fap, 0, &hdr, sizeof(hdr));
-    return (bootutil_img_validate(NULL, 0, &hdr, fap, tmpbuf, sizeof(tmpbuf),NULL, 0, hash_buf));
+    // return (bootutil_img_validate(NULL, 0, &hdr, fap, tmpbuf, sizeof(tmpbuf),NULL, 0, hash_buf));
+
+    FIH_CALL(bootutil_img_validate, fih_rc, NULL, 0, &hdr, fap, tmpbuf, sizeof(tmpbuf), NULL, 0, hash_buf);
+    return fih_rc;
 }
 
 
@@ -2383,7 +2389,7 @@ context_boot_go(struct boot_loader_state *state, struct boot_rsp *rsp)
             /* Attempt to read an image header from each slot. Ensure that image
              * headers in slots are aligned with headers in boot_data.
              */
-            rc = boot_read_image_headers(state, false, NULL);
+            rc = boot_read_image_headers(state, false, &bs);
             if (rc != 0) {
                 FIH_SET(fih_rc, FIH_FAILURE);
                 goto out;
@@ -2472,7 +2478,6 @@ out:
 #else
     memset(&bs, 0, sizeof(struct boot_status));
 #endif
-
     close_all_flash_areas(state);
     FIH_RET(fih_rc);
 }
@@ -3527,6 +3532,7 @@ boot_go(struct boot_rsp *rsp)
     boot_state_clear(NULL);
 
     FIH_CALL(context_boot_go, fih_rc, &boot_data, rsp);
+
     FIH_RET(fih_rc);
 }
 

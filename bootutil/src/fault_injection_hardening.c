@@ -42,6 +42,7 @@ fih_int fih_cfi_get_and_increment(void)
 void fih_cfi_validate(fih_int saved)
 {
     if (fih_int_decode(saved) != fih_int_decode(_fih_cfi_ctr)) {
+        // printf("fih_cfi_validate failed! %d---%d\r\n",fih_int_decode(saved),fih_int_decode(_fih_cfi_ctr));
         FIH_PANIC;
     }
 }
