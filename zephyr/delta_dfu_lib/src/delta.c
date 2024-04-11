@@ -102,8 +102,8 @@ static int save_backup_image(void *arg_p)
 	if((status_address + 4*PAGE_SIZE + total_size) > (SECONDARY_OFFSET + SECONDARY_SIZE - PAGE_SIZE))		//4 pages to save status pages + the last 1 page reserve
 #endif
 	{
-		printk("## The delta file has a big variation!");
-		return DELTA_WRITING_ERROR;
+		printk("## The delta file has a big variation!\r\n");
+		return -DELTA_WRITING_ERROR;
 	}
 
 	for (i = 1; i <= (total_size/PAGE_SIZE + 1); i++)
@@ -184,13 +184,17 @@ static int apply_last_buffer(void *arg_p)
 {
 	struct flash_mem *flash = (struct flash_mem *)arg_p;
 	uint32_t opFlag = DELTA_OP_APPLY;	
+	int rc;
 
-	printk("===== Apply last Flash buffer\r");
+	// printk("===== Apply last Flash buffer\r\n");
 	if (flash_erase(flash_device, flash->to_current, ERASE_PAGE_SIZE)) {
 		return -DELTA_CLEARING_ERROR;
 	}
-	if (flash_write(flash_device, flash->to_current, to_flash_buf, flash->write_size)) {
-		printk("flash write err\r");
+	// printk("last Flash buffer:addr=0X%lx\t write_size=%d\r\n",flash->to_current,flash->write_size);
+	rc = flash_write(flash_device, flash->to_current, to_flash_buf, flash->write_size);
+	if (rc) 
+	{
+		printk("flash write err = %d\r\n", rc);
 		return -DELTA_WRITING_ERROR;
 	}
 
@@ -733,7 +737,7 @@ int apply_write_status(struct flash_mem *flash,off_t addr)
 int apply_read_status(struct flash_mem *flash)
 {	
 	struct bak_flash_mem bak_flash;
-	printf("READ: STATUS_ADDRESS = 0X%lX\r\n",status_address);
+	// printf("READ: STATUS_ADDRESS = 0X%lX\r\n",status_address);
 	
 	if (flash_read(flash_device, status_address, &bak_flash, sizeof(struct bak_flash_mem))) 
 	{
