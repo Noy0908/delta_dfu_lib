@@ -52,18 +52,18 @@ of the firmware that was replaced during the last firmware upgrade. But
 limited by the flash size, I decided to place the patch image to the
 secondary slot instead of a whole firmware. This will have a risk that
 if the delta upgrade failed, then device can not get a valid image, it
-will be get stuck forever except reflash it, So we have to make sure
-that everything is safe.
+will be get stuck forever except reflash it, so we have to make sure
+that everything is safe. Below is the flash partition map.
 
-   +------------------------------------------------+
-   | Boot(mcuboot)                                  |
-   +================================================+
-   | **primary slot(source image)**                 |
-   +------------------------------------------------+
-   | **secondary slot(patch image + backup space)** |
-   +------------------------------------------------+
-   | **settings storage**                           |
-   +------------------------------------------------+
+   +------------------------------------------------------------------+
+   | Boot(mcuboot)                                                    |
+   +==================================================================+
+   | **primary slot(source image + move_up_pages)**                   |
+   +------------------------------------------------------------------+
+   | **secondary slot(patch image + backup space + status_storage)**  |
+   +------------------------------------------------------------------+
+   | **settings storage**                                             |
+   +------------------------------------------------------------------+
 
 .. -security:
 

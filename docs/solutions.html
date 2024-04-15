@@ -56,6 +56,7 @@
 </li>
 <li class="toctree-l1"><a class="reference internal" href="environment_setup.html">Requirements</a></li>
 <li class="toctree-l1"><a class="reference internal" href="testing.html">Testing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="performance.html">Test Results</a></li>
 <li class="toctree-l1"><a class="reference internal" href="additional_resources.html">Additional resources</a></li>
 </ul>
 
@@ -125,8 +126,8 @@ of the firmware that was replaced during the last firmware upgrade. But
 limited by the flash size, I decided to place the patch image to the
 secondary slot instead of a whole firmware. This will have a risk that
 if the delta upgrade failed, then device can not get a valid image, it
-will be get stuck forever except reflash it, So we have to make sure
-that everything is safe.</p>
+will be get stuck forever except reflash it, so we have to make sure
+that everything is safe. Below is the flash partition map.</p>
 <blockquote>
 <div><table class="docutils align-default">
 <thead>
@@ -134,9 +135,9 @@ that everything is safe.</p>
 </tr>
 </thead>
 <tbody>
-<tr class="row-even"><td><p><strong>primary slot(source image)</strong></p></td>
+<tr class="row-even"><td><p><strong>primary slot(source image + move_up_pages)</strong></p></td>
 </tr>
-<tr class="row-odd"><td><p><strong>secondary slot(patch image + backup space)</strong></p></td>
+<tr class="row-odd"><td><p><strong>secondary slot(patch image + backup space + status_storage)</strong></p></td>
 </tr>
 <tr class="row-even"><td><p><strong>settings storage</strong></p></td>
 </tr>

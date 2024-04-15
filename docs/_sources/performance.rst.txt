@@ -42,11 +42,9 @@ chip           source image size target image size patch size
 The size of the patch file depends on two factors:
 ======================================================
 
-.. note::
+   .. note::
 
-   *  the size of the source file
-
-   *  the difference between the source and target files
+      *  the difference between the source and target files
 
 
 .. -How-much-flash-space-need-to-be-reserved
@@ -58,15 +56,15 @@ How much flash space need to be reserved
 -  Primary slot: The primary slot will move up old image to reserve space for new image during patch applying, so it should reserve the move_up_pages and new image space.
 
 
-.. important::
-   * new image + (move_up_pages + 1) \* 4KB
+   .. important::
+      *  new image + (move_up_pages + 1) \* 4KB
 
-   * move_up_pages = ((patch_size/2)/PAGE_SIZE > 0) ? ((patch_size/2)/PAGE_SIZE) : 1)
+      *  move_up_pages = ((patch_size/2)/PAGE_SIZE > 0) ? ((patch_size/2)/PAGE_SIZE) : 1)
 
 -  Secondary slot: The secondary slot is used to save the patch file and backup image, it also save the status information during patch applying for resume the operation when power is restored from the resume      the operation when power is restored power off. backup size depends on the difference between the source and target files and it will be printed after the first applying, so you need to check the log if you can not sure if the reserve space is enough.  
 
-.. important::  
-   * patch image + status_storage(16KB) + backup + 4KB
+   .. important::  
+      *  patch image + status_storage(16KB) + backup + 4KB
 
 ---------------------------------------------------------
 
@@ -76,7 +74,7 @@ How much flash space need to be reserved
 Suggestions
 =========================================
 
-.. tip::
-   -  It is best to reserve 100KB for delta dfu in the secondary slot.
+   .. tip::
+      -  It is best to reserve 100KB for delta dfu in the secondary slot.
 
-   -  If there is indeed a large patch file upgrade, please upgrade multiple times with a smaller patch size.  
+      -  If there is indeed a large patch file upgrade, please upgrade multiple times with a smaller patch size.  

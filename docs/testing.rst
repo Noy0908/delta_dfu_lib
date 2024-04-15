@@ -35,7 +35,16 @@ Install essential tools
 
 #. | you should install cryptography,intelhex,click,cbor: 
 
-   |  enter "**pip install -r requirements.txt**" command in the python environment.
+   .. code-block:: python
+      :caption: requirements.txt
+      :linenos:
+
+      cryptography>=2.6
+      intelhex
+      click
+      cbor2
+
+   |  Save the above content to the ``requirements. txt`` file then enter "**pip install -r requirements.txt**" command in the python environment.
 
 ------------------------
 
@@ -45,16 +54,46 @@ Install essential tools
 Pull the new boot code to replace your old code 
 =================================================
 
-you should pull the new boot code from below url and replace the boot
-folder in your SDK directory (v2.x.x/bootloader/mcubboot/boot).
+#. | you should pull the new boot code from below url and replace the boot
+     folder in your SDK directory (v2.x.x/bootloader/mcubboot/boot).
 
    https://github.com/Noy0908/delta_dfu_lib.git
 
-   *  branch **delta-dfu-boot-v2.6.0** is the boot for nRF Connect SDK v2.6.0
+   .. note::
+      * branch ``delta-dfu-boot-v2.6.0`` is for nRF Connect SDK v2.6.0, the tag is ``v2.6.0``
+      * branch ``delta-dfu-boot-v2.5.0`` is for nRF Connect SDK v2.5.0, the tag is ``v2.5.0``
+      * branch ``delta-dfu-boot-v2.1.0`` is for nRF Connect SDK v2.1.0, the tag is ``v2.1.0``
 
-   *  branch **delta-dfu-boot-v2.5.0** is the boot for nRF Connect SDK v2.5.0
+#. | enter your ``boot`` folder and open a git bash.
 
-   *  branch **delta-dfu-boot-v2.1.0** is the boot for nRF Connect SDK v2.1.0
+#. | save your boot first.
+	
+     .. code-block:: console
+
+         $ git init .
+ 	 $ git add .
+	 $ git commit -m "original boot"
+
+#. | add the remote repository of delta dfu
+
+     .. code-block:: console
+
+         $ git remote add origin https://github.com/Noy0908/delta_dfu_lib.git
+ 	 
+
+#.  | pull the source code of delta dfu 
+
+      .. code-block:: console
+
+          $ git pull origin
+
+#.  | checkout to the branch or tag you want.
+
+      .. code-block:: console
+	  
+	  $ git tag --list
+          $ git checkout v2.5.0
+
 
 --------------
 
@@ -64,13 +103,14 @@ folder in your SDK directory (v2.x.x/bootloader/mcubboot/boot).
 Prepare sample
 ===========================
 
-1. | you can test it on our demoes, below is the url and branches.
+#. | you can test it on our demo, below is the url and branches.
 
-     https://github.com/Noy0908/delta_dfu.git
+   https://github.com/Noy0908/delta_dfu.git
+	
+   .. note::
+       branch ``delta-dfu-sample`` is the demo for nRF9160,nRF52840 and nRF54L15, the corresponding tag is ``v1.0.0``.
 
-     |  branch **delta_dfu_sample_v2.6.0** is the demo for nRF9160,nRF52840 and nRF54L15.
-
-2. | Of course you can test it on any application samples, but you need to add the following folders or files like the way shown in our demos to your project root directory.
+#. | Of course you can test it on any application samples, but you need to copy the following folders or files from our demo to your project root directory.
 
      * ``scripts`` folder contains tools for generating patch files.
      * ``binaries/signed_images`` folder is used to save source image and target image.
@@ -81,39 +121,43 @@ Prepare sample
      |image1|
 
    |
-3. | Regarding folder ``scripts``, you need to change the file: scripts/signature.py. 
+#. | Regarding folder ``scripts``, you need to change the file: ``scripts/signature.py``. 
      Make sure it aligns with your own bootloader/mcuboot absolute path.
      And make ``--slot-size 0xaf000`` equal to the primary slot size, make ``--header-size 0x800`` 
      equal to the mcuboot pad size.
 
-4. | allocate your flash partition. you can create a ``pm_static.yml`` file in
+#. | allocate your flash partition. you can create a ``pm_static.yml`` file in
      your project root directory to redefine the flash partition.
 
- .. note::
-    remember that you must define the primary slot and secondary
-    slot, and these two slots support differnet size.
+   .. note::
+      remember that you must define the primary slot and secondary
+      slot, and these two slots support differnet size.
 
-5. | enable delta dfu. you can modify ``child_image/mcuboot.conf`` file to
+#. | enable delta dfu. you can modify ``child_image/mcuboot.conf`` file to
      set these macros for different chipsets:
 
    .. code-block:: python
       :caption: mcuboot configurations.
       :linenos:
-      :emphasize-lines: 3,5
+      :emphasize-lines: 1-10
 
+      CONFIG_BOOT_SIGNATURE_TYPE_ECDSA_P256=y
       #These macros for nRF54L15 sample
       CONFIG_BOOT_MAX_IMG_SECTORS=256
       CONFIG_NRF_RRAM_WRITE_BUFFER_SIZE=16
       #These macros for 9160DK and nRF52840 sample
       CONFIG_BOOT_MAX_IMG_SECTORS=240
       CONFIG_SOC_FLASH_NRF_EMULATE_ONE_BYTE_WRITE_ACCESS=y
+      # support application delta dfu
+      CONFIG_BOOT_UPGRADE_APP_DELTA=y
+      CONFIG_MAIN_STACK_SIZE=20480
 
-6. | enable mcuboot in your project config files(prj.conf).
+#. | enable mcuboot in your project config files(prj.conf).
 
    .. code-block:: python
       :caption: application configurations.
       :linenos:
-      :emphasize-lines: 1,3
+      :emphasize-lines: 1-3
 
       CONFIG_BOOTLOADER_MCUBOOT=y
       CONFIG_IMG_MANAGER=y

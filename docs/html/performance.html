@@ -168,19 +168,19 @@ the test results can be found in below tables.</p>
 <hr class="docutils" />
 <section id="the-size-of-the-patch-file-depends-on-two-factors">
 <h2>The size of the patch file depends on two factors:<a class="headerlink" href="#the-size-of-the-patch-file-depends-on-two-factors" title="Permalink to this heading"></a></h2>
-<div class="admonition note">
+<blockquote>
+<div><div class="admonition note">
 <p class="admonition-title">Note</p>
 <ul class="simple">
-<li><p>the size of the source file</p></li>
 <li><p>the difference between the source and target files</p></li>
 </ul>
 </div>
+</div></blockquote>
 </section>
 <section id="how-much-flash-space-need-to-be-reserved">
 <h2>How much flash space need to be reserved<a class="headerlink" href="#how-much-flash-space-need-to-be-reserved" title="Permalink to this heading"></a></h2>
-<ul class="simple">
-<li><p>Primary slot: The primary slot will move up old image to reserve space for new image during patch applying, so it should reserve the move_up_pages and new image space.</p></li>
-</ul>
+<ul>
+<li><p>Primary slot: The primary slot will move up old image to reserve space for new image during patch applying, so it should reserve the move_up_pages and new image space.</p>
 <div class="admonition important">
 <p class="admonition-title">Important</p>
 <ul class="simple">
@@ -188,26 +188,29 @@ the test results can be found in below tables.</p>
 <li><p>move_up_pages = ((patch_size/2)/PAGE_SIZE &gt; 0) ? ((patch_size/2)/PAGE_SIZE) : 1)</p></li>
 </ul>
 </div>
-<ul class="simple">
-<li><p>Secondary slot: The secondary slot is used to save the patch file and backup image, it also save the status information during patch applying for resume the operation when power is restored from the resume      the operation when power is restored power off. backup size depends on the difference between the source and target files and it will be printed after the first applying, so you need to check the log if you can not sure if the reserve space is enough.</p></li>
-</ul>
+</li>
+<li><p>Secondary slot: The secondary slot is used to save the patch file and backup image, it also save the status information during patch applying for resume the operation when power is restored from the resume      the operation when power is restored power off. backup size depends on the difference between the source and target files and it will be printed after the first applying, so you need to check the log if you can not sure if the reserve space is enough.</p>
 <div class="admonition important">
 <p class="admonition-title">Important</p>
 <ul class="simple">
 <li><p>patch image + status_storage(16KB) + backup + 4KB</p></li>
 </ul>
 </div>
+</li>
+</ul>
 <hr class="docutils" />
 </section>
 <section id="suggestions">
 <h2>Suggestions<a class="headerlink" href="#suggestions" title="Permalink to this heading"></a></h2>
-<div class="admonition tip">
+<blockquote>
+<div><div class="admonition tip">
 <p class="admonition-title">Tip</p>
 <ul class="simple">
 <li><p>It is best to reserve 100KB for delta dfu in the secondary slot.</p></li>
 <li><p>If there is indeed a large patch file upgrade, please upgrade multiple times with a smaller patch size.</p></li>
 </ul>
 </div>
+</div></blockquote>
 </section>
 </section>
 

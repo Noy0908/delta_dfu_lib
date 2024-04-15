@@ -106,5 +106,3 @@ consists of the parts: *diff*, *extra*, and *adjustment*, which together
 make up the instructions for a small section of the target image.
 Sequential patching is hence a loop which repeats the same three steps
 until the patch is fully applied.
-
---------------

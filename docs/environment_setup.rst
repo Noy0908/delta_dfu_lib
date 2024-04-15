@@ -8,6 +8,9 @@ start working with the delta dfu boot.
 Once completed, you will be able to run and test the differential
 upgrade with Nordic nRF52 series, nRF91 series and nRF54L series.
 
+
+.. _Hardware-requirements:
+
 Hardware requirements
 *********************
 
@@ -24,6 +27,9 @@ To start working with the devices, refer to the following guidelines:
 
  * `Getting started with nRF52 Series`_
 
+
+.. _Software-requirements:
+
 Software requirements
 **********************
 
@@ -37,6 +43,8 @@ Currently we support three NCS SDK versions:
    * nRF Connect SDK v2.6.0
 
 
+.. _nRF-Connect-SDK:
+
 nRF Connect SDK
 ===============
 
@@ -48,29 +56,31 @@ boards:
    * Follow `Installing automatically`_ guildelines to perform an automatic installation through the Toolchain Manager.
    * Follow `Installing manually`_ guidelines to perform a manual installation.
 
-   .. note::
-      For additional information on setting up the device as well as Nordic’s development environment and tools, see the `nRF Connect SDK Getting started guide`_.
+     .. note::
+        For additional information on setting up the device as well as Nordic’s development environment and tools, see the `nRF Connect SDK Getting started guide`_.
+
+#. How to change SDK versions
+
+   * go to the nrf directory of your SDK, and fetch the origin update.
+
+      .. code-block:: console
+
+         $ git fetch origin
+
+   * checkout to the branch or tag you want.
+
+      .. code-block:: console
+
+         $ git checkout v2.5.0
+
+   * pull the latest update to main branch.
+
+      .. code-block:: console
+
+         $ west update
 
 
-#. go to the nrf directory of your SDK, and fetch the origin update.
-
-   #. go to the nrf directory of your SDK, and fetch the origin update.
-
-   .. code-block:: console
-
-      $ git fetch origin
-
-#. checkout to the main branch.
-
-   .. code-block:: console
-
-      $ git checkout main
-
-#. pull the latest update to main branch.
-
-   .. code-block:: console
-
-      $ west update
+.. _nRF-Command-Line-Tools:
 
 nRF Command Line Tools
 ======================
