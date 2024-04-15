@@ -362,6 +362,8 @@ zephyr_library_sources(
 )
 endif()
 
+
+
 # # support application delta dfu
 # if(DEFINED CONFIG_BOOT_UPGRADE_APP_DELTA)
 #   # The external static library that we are linking with does not know
