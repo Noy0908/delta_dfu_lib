@@ -732,7 +732,7 @@ swap_run(struct boot_loader_state *state, struct boot_status *bs,
 
 #else
 
-    // BOOT_LOG_INF("============Start sector move up at %" PRIu32 "\n", k_uptime_get_32());
+    BOOT_LOG_INF("============Start sector move up at %" PRIu32 "\n", k_uptime_get_32());
 /** move up source image move_up_pages pages */
     if (bs->op == BOOT_STATUS_OP_MOVE) {
         idx = last_idx;
@@ -761,7 +761,7 @@ swap_run(struct boot_loader_state *state, struct boot_status *bs,
             goto restore;
         }     
     }
-    // BOOT_LOG_INF("============Traverse end at %" PRIu32 "\n", k_uptime_get_32());
+    BOOT_LOG_INF("============Traverse end at %" PRIu32 "\n", k_uptime_get_32());
     /** Now we start to apply patch file to create new image*/
     if(opFlag == DELTA_OP_APPLY)
     { 
