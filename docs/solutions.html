@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Solutions &mdash; Delta dfu boot  documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="_static/tabs.css?v=a5c4661c" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="_static/jquery.js?v=5d32c60e"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js?v=b3ba4146"></script>
+        <script src="_static/doctools.js?v=888ff710"></script>
+        <script src="_static/sphinx_highlight.js?v=4825356b"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Requirements" href="environment_setup.html" />
+    <link rel="prev" title="Delta DFU Introduction" href="delta_dfu_introduction.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            Delta dfu boot
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Subpages:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="delta_dfu_introduction.html">Delta DFU Introduction</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Solutions</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#boot">boot</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#images-location">Images location</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#security">Security</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="environment_setup.html">Requirements</a></li>
+<li class="toctree-l1"><a class="reference internal" href="testing.html">Testing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="performance.html">Test Results</a></li>
+<li class="toctree-l1"><a class="reference internal" href="additional_resources.html">Additional resources</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Delta dfu boot</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Solutions</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/solutions.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="solutions">
+<span id="id1"></span><h1>Solutions<a class="headerlink" href="#solutions" title="Permalink to this heading"></a></h1>
+<p>In our project we selected
+<a class="reference external" href="https://github.com/eerimoq/detools">detools</a> patching in combination
+with heatshrink compression/decompression which is highly portable to
+Zephyr, just need a little modify when port it.
+we create patch with a python script , it calls
+<a class="reference external" href="https://github.com/eerimoq/detools">detools</a> command to generate a
+patch between source image and target image, this step is completed on
+your PC. The patch created by the
+<a class="reference external" href="https://github.com/eerimoq/detools">detools</a> differencing algorithm
+is a sequential patch. Consequently, the patching algorithm consists of
+the looping of several stages. these are: reading a chunk (512 byte),
+getting the size of the diff, applying the diff, getting the size of the
+extra, applying the extra, and adjusting the position of the buffer
+reading from the source image. However, it does also require that the
+source image can not be moved during run-time, but we only have one
+memory regions to save the application firmware, so we must find out the
+source image sections which will be used in the later procedure and save
+them in a backup area first , then we start the real apply process.</p>
+<hr class="docutils" />
+<section id="boot">
+<h2>boot<a class="headerlink" href="#boot" title="Permalink to this heading"></a></h2>
+<p>The delta dfu can support a lot of bootloders, it’s easy to port to
+other platforms as it is written in C language. In order to keep
+coinsistent with NCS platform, I port it to the mcuboot . As you know
+that mcuboot can not support two different slot size, but now differnt
+slot size can be allocated with delta dfu. I suggest to allocate a large
+flash space to the primary slot which used to save the application
+image, and allocate a smaller flash to secondary slot to save the patch
+image and the backup image during applying .</p>
+<hr class="docutils" />
+</section>
+<section id="images-location">
+<h2>Images location<a class="headerlink" href="#images-location" title="Permalink to this heading"></a></h2>
+<p>At first glance it might seems as only one option exists when it comes
+to the location of the source image - the primary partition. As the
+secondary image usually contains a version of the firmware - the version
+of the firmware that was replaced during the last firmware upgrade. But
+limited by the flash size, I decided to place the patch image to the
+secondary slot instead of a whole firmware. This will have a risk that
+if the delta upgrade failed, then device can not get a valid image, it
+will be get stuck forever except reflash it, So we have to make sure
+that everything is safe.</p>
+<blockquote>
+<div><table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Boot(mcuboot)</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>primary slot(source image)</strong></p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>secondary slot(patch image + backup space)</strong></p></td>
+</tr>
+<tr class="row-even"><td><p><strong>settings storage</strong></p></td>
+</tr>
+</tbody>
+</table>
+</div></blockquote>
+</section>
+<section id="security">
+<h2>Security<a class="headerlink" href="#security" title="Permalink to this heading"></a></h2>
+<p>Firmware delta updates implement security features to ensure that only
+firmware updates from authorized images. Delta update files are
+encrypted and signed. The boot takes care of verifying the signature and
+decrypting the content as necessary, and it also supports several
+fail-safe mechanisms to ensure that the MCU continues to operate
+normally in case of errors.</p>
+<ul class="simple">
+<li><p>If the MCU detects issues with the new firmware before commencing the
+update process at boot time, the MCU automatically aborts the update
+process and runs the previous firmware when it boots again.</p></li>
+<li><p>If the device suddenly loses power during the transfer of the new
+firmware, the application can resume the operation when power is
+restored and the modem boots again.</p></li>
+<li><p>If the device suddenly loses power during the update process at boot
+time, the MCU resumes the operation automatically when it boots
+again.</p></li>
+</ul>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="delta_dfu_introduction.html" class="btn btn-neutral float-left" title="Delta DFU Introduction" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="environment_setup.html" class="btn btn-neutral float-right" title="Requirements" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, Nordic Semiconductor.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
