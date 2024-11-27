@@ -1,5 +1,7 @@
+
+
 <!DOCTYPE html>
-<html class="writer-html5" lang="en">
+<html class="writer-html5" lang="en" data-content_root="./">
 <head>
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
@@ -7,18 +9,13 @@
   <title>Delta DFU Introduction &mdash; Delta dfu boot  documentation</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=80d5e7a1" />
       <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=19f00094" />
-      <link rel="stylesheet" type="text/css" href="_static/tabs.css?v=a5c4661c" />
 
   
-  <!--[if lt IE 9]>
-    <script src="_static/js/html5shiv.min.js"></script>
-  <![endif]-->
-  
-        <script src="_static/jquery.js?v=5d32c60e"></script>
-        <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js?v=b3ba4146"></script>
-        <script src="_static/doctools.js?v=888ff710"></script>
-        <script src="_static/sphinx_highlight.js?v=4825356b"></script>
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=b3ba4146"></script>
+      <script src="_static/doctools.js?v=888ff710"></script>
+      <script src="_static/sphinx_highlight.js?v=4825356b"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
@@ -86,7 +83,7 @@
            <div itemprop="articleBody">
              
   <section id="delta-dfu-introduction">
-<span id="id1"></span><h1>Delta DFU Introduction<a class="headerlink" href="#delta-dfu-introduction" title="Permalink to this heading"></a></h1>
+<span id="id1"></span><h1>Delta DFU Introduction<a class="headerlink" href="#delta-dfu-introduction" title="Link to this heading"></a></h1>
 <p>Delta upgrade is know as differential compression. Differential
 Compression is the process of creating and applying delta patch. The
 ideal patch is minimal in space complexity and has high usability, so
@@ -96,7 +93,7 @@ generate a new image. This implies that finding an algorithm for
 differential compression includes diff algorithm, compress/decompress
 algorithm.</p>
 <section id="algorithms">
-<h2>Algorithms<a class="headerlink" href="#algorithms" title="Permalink to this heading"></a></h2>
+<h2>Algorithms<a class="headerlink" href="#algorithms" title="Link to this heading"></a></h2>
 <p>A diff algorithm outputs the set of differences between two inputs which
 is called <em>patch</em> or <em>delta</em>, it opens the door to using compression
 algorithms to generate a diff and delta file which can greatly reduced
@@ -110,7 +107,7 @@ point of the process is to recreate the target.</p>
 <hr class="docutils" />
 </section>
 <section id="bsdiff">
-<h2>BSDiff<a class="headerlink" href="#bsdiff" title="Permalink to this heading"></a></h2>
+<h2>BSDiff<a class="headerlink" href="#bsdiff" title="Link to this heading"></a></h2>
 <p>The <a class="reference external" href="http://www.daemonology.net/bsdiff/?ref=hackernoon.com">BSDiff</a>
 algorithm belongs to the block move family and is focused on achieving
 minimal delta/patch size. It is also specifically optimized for
@@ -132,7 +129,7 @@ differences between old binary and the new are highly compressible.</p>
 <hr class="docutils" />
 </section>
 <section id="heat-shrink">
-<h2>heat-shrink<a class="headerlink" href="#heat-shrink" title="Permalink to this heading"></a></h2>
+<h2>heat-shrink<a class="headerlink" href="#heat-shrink" title="Link to this heading"></a></h2>
 <p><a class="reference external" href="https://github.com/atomicobject/heatshrink">heat-shrink</a> is an
 excellent compression/decompression algorithm with the following
 advantages:</p>
@@ -159,7 +156,7 @@ first occurrence of this sub-string</p>
 <hr class="docutils" />
 </section>
 <section id="patching">
-<h2>Patching<a class="headerlink" href="#patching" title="Permalink to this heading"></a></h2>
+<h2>Patching<a class="headerlink" href="#patching" title="Link to this heading"></a></h2>
 <p>In the same manner that the creation of a patch is related to data
 compression, the application of a patch is related to decompression. The
 patch created by the <a class="reference external" href="https://github.com/eerimoq/detools">detools</a>

@@ -1,5 +1,7 @@
+
+
 <!DOCTYPE html>
-<html class="writer-html5" lang="en">
+<html class="writer-html5" lang="en" data-content_root="./">
 <head>
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
@@ -7,18 +9,13 @@
   <title>Solutions &mdash; Delta dfu boot  documentation</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=80d5e7a1" />
       <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=19f00094" />
-      <link rel="stylesheet" type="text/css" href="_static/tabs.css?v=a5c4661c" />
 
   
-  <!--[if lt IE 9]>
-    <script src="_static/js/html5shiv.min.js"></script>
-  <![endif]-->
-  
-        <script src="_static/jquery.js?v=5d32c60e"></script>
-        <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js?v=b3ba4146"></script>
-        <script src="_static/doctools.js?v=888ff710"></script>
-        <script src="_static/sphinx_highlight.js?v=4825356b"></script>
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=b3ba4146"></script>
+      <script src="_static/doctools.js?v=888ff710"></script>
+      <script src="_static/sphinx_highlight.js?v=4825356b"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
@@ -85,7 +82,7 @@
            <div itemprop="articleBody">
              
   <section id="solutions">
-<span id="id1"></span><h1>Solutions<a class="headerlink" href="#solutions" title="Permalink to this heading"></a></h1>
+<span id="id1"></span><h1>Solutions<a class="headerlink" href="#solutions" title="Link to this heading"></a></h1>
 <p>In our project we selected
 <a class="reference external" href="https://github.com/eerimoq/detools">detools</a> patching in combination
 with heatshrink compression/decompression which is highly portable to
@@ -106,7 +103,7 @@ source image sections which will be used in the later procedure and save
 them in a backup area first , then we start the real apply process.</p>
 <hr class="docutils" />
 <section id="boot">
-<h2>boot<a class="headerlink" href="#boot" title="Permalink to this heading"></a></h2>
+<h2>boot<a class="headerlink" href="#boot" title="Link to this heading"></a></h2>
 <p>The delta dfu can support a lot of bootloders, it’s easy to port to
 other platforms as it is written in C language. In order to keep
 coinsistent with NCS platform, I port it to the mcuboot . As you know
@@ -118,7 +115,7 @@ image and the backup image during applying .</p>
 <hr class="docutils" />
 </section>
 <section id="images-location">
-<h2>Images location<a class="headerlink" href="#images-location" title="Permalink to this heading"></a></h2>
+<h2>Images location<a class="headerlink" href="#images-location" title="Link to this heading"></a></h2>
 <p>At first glance it might seems as only one option exists when it comes
 to the location of the source image - the primary partition. As the
 secondary image usually contains a version of the firmware - the version
@@ -146,7 +143,7 @@ that everything is safe.</p>
 </div></blockquote>
 </section>
 <section id="security">
-<h2>Security<a class="headerlink" href="#security" title="Permalink to this heading"></a></h2>
+<h2>Security<a class="headerlink" href="#security" title="Link to this heading"></a></h2>
 <p>Firmware delta updates implement security features to ensure that only
 firmware updates from authorized images. Delta update files are
 encrypted and signed. The boot takes care of verifying the signature and

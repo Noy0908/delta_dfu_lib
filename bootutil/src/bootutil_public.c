@@ -228,6 +228,7 @@ boot_read_swap_state(const struct flash_area *fap,
     off = boot_magic_off(fap);
     rc = flash_area_read(fap, off, magic, BOOT_MAGIC_SZ);
     if (rc < 0) {
+        
         return BOOT_EFLASH;
     }
     if (bootutil_buffer_is_erased(fap, magic, BOOT_MAGIC_SZ)) {
