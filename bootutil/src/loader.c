@@ -74,7 +74,8 @@ int pcd_version_cmp_net(const struct flash_area *fap, struct image_header *hdr);
 #include <os/os_malloc.h>
 #endif
 
-#include "mcuboot_config/mcuboot_config.h"
+// #include "mcuboot_config/mcuboot_config.h"
+#include <stdio.h>
 
 BOOT_LOG_MODULE_DECLARE(mcuboot);
 

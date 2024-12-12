@@ -1,3 +1,4 @@
 {
-    "iis.configDir": ""
+    "iis.configDir": "",
+    "cmake.sourceDirectory": "C:/ncs/v2.8.0/bootloader/mcuboot/boot/bootutil"
 }
