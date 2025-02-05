@@ -35,7 +35,16 @@ Install essential tools
 
 #. | you should install cryptography,intelhex,click,cbor: 
 
-   |  enter "**pip install -r requirements.txt**" command in the python environment.
+   .. code-block:: python
+      :caption: requirements.txt
+      :linenos:
+
+      cryptography>=2.6
+      intelhex
+      click
+      cbor2
+
+   |  Save the above content to the ``requirements. txt`` file then enter "**pip install -r requirements.txt**" command in the python environment.
 
 ------------------------
 
@@ -45,10 +54,11 @@ Install essential tools
 Pull the new boot code to replace your old code 
 =================================================
 
-you should pull the new boot code from below url and replace the boot
-folder in your SDK directory (v2.x.x/bootloader/mcubboot/boot).
+#. you should download the new boot code from below url and replace the ``boot`` folder in your SDK directory (v2.x.x/bootloader/mcuboot/boot).
 
    https://github.com/Noy0908/delta_dfu_lib.git
+
+   *  branch **delta-dfu-boot-v2.9.0** is the boot for nRF Connect SDK v2.9.0
 
    *  branch **delta-dfu-boot-v2.8.0** is the boot for nRF Connect SDK v2.8.0
    
@@ -70,15 +80,19 @@ Prepare sample
 
      https://github.com/Noy0908/delta_dfu.git
 
-     *  branch **delta-dfu-sample-sysbuild** is the demo for NCS2.8.0.
-     *  branch **delta-dfu-sample** is the demo for NCS2.5.0 and  NCS2.6.0.
+     *  branch **delta-dfu-sample-sysbuild** is the demo for SDK version is higher than 2.7.0.
+     *  branch **delta-dfu-sample** is the demo for SDK version is lower than 2.7.0.
 
-2. | Of course you can test it on any application samples, but you need to add the following folders or files like the way shown in our demos to your project root directory.
+ .. note::
+    The nRF54L devices are equipped with Hardware Key Management Unit (KMU), the sample default enable it, that requires provisioning when in use.
+    Please refer to the `Performing KMU provisioning <https://docs.nordicsemi.com/bundle/ncs-latest/page/nrf/app_dev/device_guides/nrf54l/kmu_provision.html>`__ to provision it.
+
+2. | Of course you can test it on any application samples, but you need to copy the following folders or files from our demo to your project root directory.
 
      * ``scripts`` folder contains tools for generating patch files.
      * ``binaries/signed_images`` folder is used to save source image and target image.
      * ``binaries/patches`` folder is used to save patch image.
-     * ``pm_static.yml`` file is used to reallocate your flash partition.
+     * ``pm_static_BOARD.yml`` file is used to reallocate your flash partition.
      * ``child_image/mcuboot.conf`` file is used to config delta dfu feature in mcuboot if your SDK version is lower than 2.7.0.
      * ``sysbuild/mcuboot`` folder is used to config delta dfu feature in mcuboot if your SDK version is higher than 2.7.0.
 
@@ -90,7 +104,7 @@ Prepare sample
      And make ``--slot-size 0xaf000`` equal to the primary slot size, make ``--header-size 0x800`` 
      equal to the mcuboot pad size.
 
-4. | allocate your flash partition. you can create a ``pm_static.yml`` file in
+4. | allocate your flash partition. you can modify the ``pm_static_BOARD.yml`` file in
      your project root directory to redefine the flash partition.
 
  .. note::
@@ -104,7 +118,6 @@ Prepare sample
    .. code-block:: python
       :caption: child_image/mcuboot.conf.
       :linenos:
-      :emphasize-lines: 3,5
 
       #These macros for nRF54L15 sample
       CONFIG_BOOT_MAX_IMG_SECTORS=256
@@ -119,7 +132,6 @@ Prepare sample
    .. code-block:: python
       :caption: sysbuild.conf.
       :linenos:
-      :emphasize-lines: 1,2
 
       SB_CONFIG_BOOTLOADER_MCUBOOT=y
       SB_CONFIG_BOOT_SIGNATURE_TYPE_ECDSA_P256=y
@@ -131,7 +143,6 @@ Prepare sample
    .. code-block:: python
       :caption: application configurations.
       :linenos:
-      :emphasize-lines: 1,3
 
       CONFIG_BOOTLOADER_MCUBOOT=y
       CONFIG_IMG_MANAGER=y

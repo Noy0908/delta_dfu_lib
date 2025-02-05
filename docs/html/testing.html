@@ -113,8 +113,17 @@ really ease for you to merge it to your SDK.</p>
 <li><div class="line-block">
 <div class="line">you should install cryptography,intelhex,click,cbor:</div>
 </div>
+<div class="literal-block-wrapper docutils container" id="id2">
+<div class="code-block-caption"><span class="caption-text">requirements.txt</span><a class="headerlink" href="#id2" title="Link to this code"></a></div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="n">cryptography</span><span class="o">&gt;=</span><span class="mf">2.6</span>
+<span class="linenos">2</span><span class="n">intelhex</span>
+<span class="linenos">3</span><span class="n">click</span>
+<span class="linenos">4</span><span class="n">cbor2</span>
+</pre></div>
+</div>
+</div>
 <div class="line-block">
-<div class="line">enter “<strong>pip install -r requirements.txt</strong>” command in the python environment.</div>
+<div class="line">Save the above content to the <code class="docutils literal notranslate"><span class="pre">requirements.</span> <span class="pre">txt</span></code> file then enter “<strong>pip install -r requirements.txt</strong>” command in the python environment.</div>
 </div>
 </li>
 </ol>
@@ -122,17 +131,18 @@ really ease for you to merge it to your SDK.</p>
 </section>
 <section id="pull-the-new-boot-code-to-replace-your-old-code">
 <h2>Pull the new boot code to replace your old code<a class="headerlink" href="#pull-the-new-boot-code-to-replace-your-old-code" title="Link to this heading"></a></h2>
-<p>you should pull the new boot code from below url and replace the boot
-folder in your SDK directory (v2.x.x/bootloader/mcubboot/boot).</p>
-<blockquote>
-<div><p><a class="reference external" href="https://github.com/Noy0908/delta_dfu_lib.git">https://github.com/Noy0908/delta_dfu_lib.git</a></p>
+<ol class="arabic">
+<li><p>you should download the new boot code from below url and replace the <code class="docutils literal notranslate"><span class="pre">boot</span></code> folder in your SDK directory (v2.x.x/bootloader/mcuboot/boot).</p>
+<p><a class="reference external" href="https://github.com/Noy0908/delta_dfu_lib.git">https://github.com/Noy0908/delta_dfu_lib.git</a></p>
 <ul class="simple">
+<li><p>branch <strong>delta-dfu-boot-v2.9.0</strong> is the boot for nRF Connect SDK v2.9.0</p></li>
 <li><p>branch <strong>delta-dfu-boot-v2.8.0</strong> is the boot for nRF Connect SDK v2.8.0</p></li>
 <li><p>branch <strong>delta-dfu-boot-v2.6.0</strong> is the boot for nRF Connect SDK v2.6.0</p></li>
 <li><p>branch <strong>delta-dfu-boot-v2.5.0</strong> is the boot for nRF Connect SDK v2.5.0</p></li>
 <li><p>branch <strong>delta-dfu-boot-v2.1.0</strong> is the boot for nRF Connect SDK v2.1.0</p></li>
 </ul>
-</div></blockquote>
+</li>
+</ol>
 <hr class="docutils" />
 </section>
 <section id="prepare-sample">
@@ -144,20 +154,29 @@ folder in your SDK directory (v2.x.x/bootloader/mcubboot/boot).</p>
 <blockquote>
 <div><p><a class="reference external" href="https://github.com/Noy0908/delta_dfu.git">https://github.com/Noy0908/delta_dfu.git</a></p>
 <ul class="simple">
-<li><p>branch <strong>delta-dfu-sample-sysbuild</strong> is the demo for NCS2.8.0.</p></li>
-<li><p>branch <strong>delta-dfu-sample</strong> is the demo for NCS2.5.0 and  NCS2.6.0.</p></li>
+<li><p>branch <strong>delta-dfu-sample-sysbuild</strong> is the demo for SDK version is higher than 2.7.0.</p></li>
+<li><p>branch <strong>delta-dfu-sample</strong> is the demo for SDK version is lower than 2.7.0.</p></li>
 </ul>
 </div></blockquote>
 </li>
+</ol>
+<blockquote>
+<div><div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The nRF54L devices are equipped with Hardware Key Management Unit (KMU), the sample default enable it, that requires provisioning when in use.
+Please refer to the <a class="reference external" href="https://docs.nordicsemi.com/bundle/ncs-latest/page/nrf/app_dev/device_guides/nrf54l/kmu_provision.html">Performing KMU provisioning</a> to provision it.</p>
+</div>
+</div></blockquote>
+<ol class="arabic" start="2">
 <li><div class="line-block">
-<div class="line">Of course you can test it on any application samples, but you need to add the following folders or files like the way shown in our demos to your project root directory.</div>
+<div class="line">Of course you can test it on any application samples, but you need to copy the following folders or files from our demo to your project root directory.</div>
 </div>
 <blockquote>
 <div><ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">scripts</span></code> folder contains tools for generating patch files.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">binaries/signed_images</span></code> folder is used to save source image and target image.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">binaries/patches</span></code> folder is used to save patch image.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">pm_static.yml</span></code> file is used to reallocate your flash partition.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">pm_static_BOARD.yml</span></code> file is used to reallocate your flash partition.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">child_image/mcuboot.conf</span></code> file is used to config delta dfu feature in mcuboot if your SDK version is lower than 2.7.0.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">sysbuild/mcuboot</span></code> folder is used to config delta dfu feature in mcuboot if your SDK version is higher than 2.7.0.</p></li>
 </ul>
@@ -175,7 +194,7 @@ equal to the mcuboot pad size.</div>
 </div>
 </li>
 <li><div class="line-block">
-<div class="line">allocate your flash partition. you can create a <code class="docutils literal notranslate"><span class="pre">pm_static.yml</span></code> file in
+<div class="line">allocate your flash partition. you can modify the <code class="docutils literal notranslate"><span class="pre">pm_static_BOARD.yml</span></code> file in
 your project root directory to redefine the flash partition.</div>
 </div>
 </li>
@@ -193,25 +212,25 @@ slot, and these two slots support differnet size.</p>
 set these macros for different chipsets if your SDK version is lower than 2.7.0,
     or modify <code class="docutils literal notranslate"><span class="pre">sysbuild.conf</span></code> file if your SDK version is higher than 2.7.0:</div>
 </div>
-<div class="literal-block-wrapper docutils container" id="id2">
-<div class="code-block-caption"><span class="caption-text">child_image/mcuboot.conf.</span><a class="headerlink" href="#id2" title="Link to this code"></a></div>
+<div class="literal-block-wrapper docutils container" id="id3">
+<div class="code-block-caption"><span class="caption-text">child_image/mcuboot.conf.</span><a class="headerlink" href="#id3" title="Link to this code"></a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="c1">#These macros for nRF54L15 sample</span>
 <span class="linenos">2</span><span class="n">CONFIG_BOOT_MAX_IMG_SECTORS</span><span class="o">=</span><span class="mi">256</span>
-<span class="hll"><span class="linenos">3</span><span class="n">CONFIG_NRF_RRAM_WRITE_BUFFER_SIZE</span><span class="o">=</span><span class="mi">16</span>
-</span><span class="linenos">4</span><span class="c1">#These macros for 9160DK and nRF52840 sample</span>
-<span class="hll"><span class="linenos">5</span><span class="n">CONFIG_BOOT_MAX_IMG_SECTORS</span><span class="o">=</span><span class="mi">240</span>
-</span><span class="linenos">6</span><span class="n">CONFIG_SOC_FLASH_NRF_EMULATE_ONE_BYTE_WRITE_ACCESS</span><span class="o">=</span><span class="n">y</span>
+<span class="linenos">3</span><span class="n">CONFIG_NRF_RRAM_WRITE_BUFFER_SIZE</span><span class="o">=</span><span class="mi">16</span>
+<span class="linenos">4</span><span class="c1">#These macros for 9160DK and nRF52840 sample</span>
+<span class="linenos">5</span><span class="n">CONFIG_BOOT_MAX_IMG_SECTORS</span><span class="o">=</span><span class="mi">240</span>
+<span class="linenos">6</span><span class="n">CONFIG_SOC_FLASH_NRF_EMULATE_ONE_BYTE_WRITE_ACCESS</span><span class="o">=</span><span class="n">y</span>
 <span class="linenos">7</span><span class="c1"># support application delta dfu</span>
 <span class="linenos">8</span><span class="n">CONFIG_BOOT_UPGRADE_APP_DELTA</span><span class="o">=</span><span class="n">y</span>
 <span class="linenos">9</span><span class="n">CONFIG_MAIN_STACK_SIZE</span><span class="o">=</span><span class="mi">20480</span>
 </pre></div>
 </div>
 </div>
-<div class="literal-block-wrapper docutils container" id="id3">
-<div class="code-block-caption"><span class="caption-text">sysbuild.conf.</span><a class="headerlink" href="#id3" title="Link to this code"></a></div>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="hll"><span class="linenos">1</span><span class="n">SB_CONFIG_BOOTLOADER_MCUBOOT</span><span class="o">=</span><span class="n">y</span>
-</span><span class="hll"><span class="linenos">2</span><span class="n">SB_CONFIG_BOOT_SIGNATURE_TYPE_ECDSA_P256</span><span class="o">=</span><span class="n">y</span>
-</span><span class="linenos">3</span><span class="n">SB_CONFIG_PM_OVERRIDE_EXTERNAL_DRIVER_CHECK</span><span class="o">=</span><span class="n">n</span>
+<div class="literal-block-wrapper docutils container" id="id4">
+<div class="code-block-caption"><span class="caption-text">sysbuild.conf.</span><a class="headerlink" href="#id4" title="Link to this code"></a></div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="n">SB_CONFIG_BOOTLOADER_MCUBOOT</span><span class="o">=</span><span class="n">y</span>
+<span class="linenos">2</span><span class="n">SB_CONFIG_BOOT_SIGNATURE_TYPE_ECDSA_P256</span><span class="o">=</span><span class="n">y</span>
+<span class="linenos">3</span><span class="n">SB_CONFIG_PM_OVERRIDE_EXTERNAL_DRIVER_CHECK</span><span class="o">=</span><span class="n">n</span>
 <span class="linenos">4</span><span class="n">SB_CONFIG_PM_EXTERNAL_FLASH_MCUBOOT_SECONDARY</span><span class="o">=</span><span class="n">n</span>
 </pre></div>
 </div>
@@ -220,12 +239,12 @@ set these macros for different chipsets if your SDK version is lower than 2.7.0,
 <li><div class="line-block">
 <div class="line">enable mcuboot in your project config files(prj.conf).</div>
 </div>
-<div class="literal-block-wrapper docutils container" id="id4">
-<div class="code-block-caption"><span class="caption-text">application configurations.</span><a class="headerlink" href="#id4" title="Link to this code"></a></div>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="hll"><span class="linenos">1</span><span class="n">CONFIG_BOOTLOADER_MCUBOOT</span><span class="o">=</span><span class="n">y</span>
-</span><span class="linenos">2</span><span class="n">CONFIG_IMG_MANAGER</span><span class="o">=</span><span class="n">y</span>
-<span class="hll"><span class="linenos">3</span><span class="n">CONFIG_MCUBOOT_IMG_MANAGER</span><span class="o">=</span><span class="n">y</span>
-</span></pre></div>
+<div class="literal-block-wrapper docutils container" id="id5">
+<div class="code-block-caption"><span class="caption-text">application configurations.</span><a class="headerlink" href="#id5" title="Link to this code"></a></div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="n">CONFIG_BOOTLOADER_MCUBOOT</span><span class="o">=</span><span class="n">y</span>
+<span class="linenos">2</span><span class="n">CONFIG_IMG_MANAGER</span><span class="o">=</span><span class="n">y</span>
+<span class="linenos">3</span><span class="n">CONFIG_MCUBOOT_IMG_MANAGER</span><span class="o">=</span><span class="n">y</span>
+</pre></div>
 </div>
 </div>
 </li>
