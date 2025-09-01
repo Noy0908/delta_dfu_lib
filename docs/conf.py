@@ -18,7 +18,7 @@
 # -- Project information -----------------------------------------------------
 
 project = 'Delta dfu boot'
-copyright = '2023, Nordic Semiconductor'
+# copyright = '2023, Nordic Semiconductor'
 author = 'Nordic Semiconductor'
 
 # -- General configuration ---------------------------------------------------
