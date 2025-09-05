@@ -2737,11 +2737,14 @@ boot_prepare_image_for_update(struct boot_loader_state *state,
              * respectively be the headers of the new and previous active image. So NULL is provided
              * as boot status.
              */
-            rc = boot_read_image_headers(state, false, NULL);
+            // rc = boot_read_image_headers(state, false, NULL);
+            rc = boot_read_image_headers(state, false, bs);
             assert(rc == 0);
 
             /* Swap has finished set to NONE */
             BOOT_SWAP_TYPE(state) = BOOT_SWAP_TYPE_NONE;
+
+            printf("11111111111111111:rebooted in the middle of an image swap operation\n");
         } else {
             /* There was no partial swap, determine swap type. */
             if (bs->swap_type == BOOT_SWAP_TYPE_NONE) {
@@ -2926,7 +2929,6 @@ fih_int get_source_hash(const struct flash_area *fap,uint8_t *hash_buf)
     FIH_DECLARE(fih_rc, FIH_FAILURE);
 
     flash_area_read(fap, 0, &hdr, sizeof(hdr));
-    // return (bootutil_img_validate(NULL, 0, &hdr, fap, tmpbuf, sizeof(tmpbuf),NULL, 0, hash_buf));
     // FIH_CALL(bootutil_img_validate, fih_rc, NULL, loader_hdr, loader_fap,tmpbuf, BOOT_TMPBUF_SZ, NULL, 0, loader_hash);
 
     FIH_CALL(bootutil_img_validate, fih_rc, NULL,  &hdr, fap, tmpbuf, sizeof(tmpbuf), NULL, 0, hash_buf);
