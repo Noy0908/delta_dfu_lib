@@ -393,14 +393,20 @@ boot_move_sector_up_pages(int idx, uint32_t sz, uint8_t pages, struct boot_loade
 
     if (bs->idx == BOOT_STATUS_IDX_0) {
         if (bs->source != BOOT_STATUS_SOURCE_PRIMARY_SLOT) {
-            rc = swap_erase_trailer_sectors(state, fap_pri);
+            // rc = swap_erase_trailer_sectors(state, fap_pri);
+            /* Remove data and prepare for write on devices requiring erase */
+            rc = swap_scramble_trailer_sectors(state, fap_pri);
             assert(rc == 0);
 
             rc = swap_status_init(state, fap_pri, bs);
             assert(rc == 0);
         }
 
-        rc = swap_erase_trailer_sectors(state, fap_sec);
+        // rc = swap_erase_trailer_sectors(state, fap_sec);
+        /* Remove status from secondary slot trailer, in case of device with
+        * erase requirement this will also prepare traier for write.
+        */
+        rc = swap_scramble_trailer_sectors(state, fap_sec);
         assert(rc == 0);
     }
 
@@ -437,14 +443,20 @@ boot_move_sector_down_pages(int idx, uint32_t sz, uint8_t pages, struct boot_loa
 
     if (bs->idx == BOOT_STATUS_IDX_0) {
         if (bs->source != BOOT_STATUS_SOURCE_PRIMARY_SLOT) {
-            rc = swap_erase_trailer_sectors(state, fap_pri);
+            // rc = swap_erase_trailer_sectors(state, fap_pri);
+            /* Remove data and prepare for write on devices requiring erase */
+            rc = swap_scramble_trailer_sectors(state, fap_pri);
             assert(rc == 0);
 
             rc = swap_status_init(state, fap_pri, bs);
             assert(rc == 0);
         }
 
-        rc = swap_erase_trailer_sectors(state, fap_sec);
+        // rc = swap_erase_trailer_sectors(state, fap_sec);
+        /* Remove status from secondary slot trailer, in case of device with
+        * erase requirement this will also prepare traier for write.
+        */
+        rc = swap_scramble_trailer_sectors(state, fap_sec);
         assert(rc == 0);
     }
 

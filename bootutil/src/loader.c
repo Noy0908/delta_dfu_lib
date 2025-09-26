@@ -2743,8 +2743,6 @@ boot_prepare_image_for_update(struct boot_loader_state *state,
 
             /* Swap has finished set to NONE */
             BOOT_SWAP_TYPE(state) = BOOT_SWAP_TYPE_NONE;
-
-            printf("11111111111111111:rebooted in the middle of an image swap operation\n");
         } else {
             /* There was no partial swap, determine swap type. */
             if (bs->swap_type == BOOT_SWAP_TYPE_NONE) {
