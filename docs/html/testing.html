@@ -135,6 +135,7 @@ really ease for you to merge it to your SDK.</p>
 <li><p>you should download the new boot code from below url and replace the <code class="docutils literal notranslate"><span class="pre">boot</span></code> folder in your SDK directory (v2.x.x/bootloader/mcuboot/boot).</p>
 <p><a class="reference external" href="https://github.com/Noy0908/delta_dfu_lib.git">https://github.com/Noy0908/delta_dfu_lib.git</a></p>
 <ul class="simple">
+<li><p>branch <strong>delta-dfu-boot-v3.1.0</strong> is the boot for nRF Connect SDK v3.1.0</p></li>
 <li><p>branch <strong>delta-dfu-boot-v2.9.0</strong> is the boot for nRF Connect SDK v2.9.0</p></li>
 <li><p>branch <strong>delta-dfu-boot-v2.8.0</strong> is the boot for nRF Connect SDK v2.8.0</p></li>
 <li><p>branch <strong>delta-dfu-boot-v2.6.0</strong> is the boot for nRF Connect SDK v2.6.0</p></li>
@@ -154,6 +155,7 @@ really ease for you to merge it to your SDK.</p>
 <blockquote>
 <div><p><a class="reference external" href="https://github.com/Noy0908/delta_dfu.git">https://github.com/Noy0908/delta_dfu.git</a></p>
 <ul class="simple">
+<li><p>branch <strong>delta-dfu-sample-kmu</strong> is the demo for nRF54L series which support KMU feature.</p></li>
 <li><p>branch <strong>delta-dfu-sample-sysbuild</strong> is the demo for SDK version is higher than 2.7.0.</p></li>
 <li><p>branch <strong>delta-dfu-sample</strong> is the demo for SDK version is lower than 2.7.0.</p></li>
 </ul>
@@ -163,13 +165,12 @@ really ease for you to merge it to your SDK.</p>
 <blockquote>
 <div><div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>The nRF54L devices are equipped with Hardware Key Management Unit (KMU), the sample default enable it, that requires provisioning when in use.
-Please refer to the <a class="reference external" href="https://docs.nordicsemi.com/bundle/ncs-latest/page/nrf/app_dev/device_guides/nrf54l/kmu_provision.html">Performing KMU provisioning</a> to provision it.</p>
+<p>The nRF54L devices are equipped with Hardware Key Management Unit (KMU), the sample default enable it, that requires provisioning when in use. Please refer to the <a class="reference external" href="https://docs.nordicsemi.com/bundle/ncs-latest/page/nrf/app_dev/device_guides/nrf54l/kmu_provision.html">Performing KMU provisioning</a> to provision it.</p>
 </div>
 </div></blockquote>
 <ol class="arabic" start="2">
 <li><div class="line-block">
-<div class="line">Of course you can test it on any application samples, but you need to copy the following folders or files from our demo to your project root directory.</div>
+<div class="line">Of course you can test it on any application samples, but you need to copy the following folders or files from our demo to             your project root directory.</div>
 </div>
 <blockquote>
 <div><ul class="simple">
@@ -210,7 +211,7 @@ slot, and these two slots support differnet size.</p>
 <li><div class="line-block">
 <div class="line">enable delta dfu. you can modify <code class="docutils literal notranslate"><span class="pre">child_image/mcuboot.conf</span></code> file to
 set these macros for different chipsets if your SDK version is lower than 2.7.0,
-    or modify <code class="docutils literal notranslate"><span class="pre">sysbuild.conf</span></code> file if your SDK version is higher than 2.7.0:</div>
+            or modify <code class="docutils literal notranslate"><span class="pre">sysbuild.conf</span></code> file if your SDK version is higher than 2.7.0:</div>
 </div>
 <div class="literal-block-wrapper docutils container" id="id3">
 <div class="code-block-caption"><span class="caption-text">child_image/mcuboot.conf.</span><a class="headerlink" href="#id3" title="Link to this code"></a></div>
@@ -301,10 +302,7 @@ then copy the source image to <code class="docutils literal notranslate"><span c
 and <code class="docutils literal notranslate"><span class="pre">scripts/patch_54l15.exe</span></code> if your chip is nRF54L15. then the differential file will be automatically generated in the directory <code class="docutils literal notranslate"><span class="pre">binaries/patches</span></code>.    Please use the differential file <code class="docutils literal notranslate"><span class="pre">signed_patch.bin</span></code> as patch file.</p></li>
 </ul>
 <blockquote>
-<div><div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>If your device has been upgraded with delta dfu once, when upgrading again, you only need to rename the target_xxx.bin file of the last upgrade to source_xxx.bin, then copy the new target_xxx.bin file to the specified folder to regenerate the patch file.</p>
-</div>
+<div><p>If your device has been upgraded with delta dfu once, when upgrading again, you only need to rename the target_xxx.bin file of the last upgrade to source_xxx.bin, then copy the new target_xxx.bin file to the specified folder to regenerate the patch file.</p>
 </div></blockquote>
 </li>
 <li><div class="line-block">

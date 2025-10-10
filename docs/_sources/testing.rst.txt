@@ -58,6 +58,8 @@ Pull the new boot code to replace your old code
 
    https://github.com/Noy0908/delta_dfu_lib.git
 
+   *  branch **delta-dfu-boot-v3.1.0** is the boot for nRF Connect SDK v3.1.0
+
    *  branch **delta-dfu-boot-v2.9.0** is the boot for nRF Connect SDK v2.9.0
 
    *  branch **delta-dfu-boot-v2.8.0** is the boot for nRF Connect SDK v2.8.0
@@ -80,14 +82,14 @@ Prepare sample
 
      https://github.com/Noy0908/delta_dfu.git
 
+     *  branch **delta-dfu-sample-kmu** is the demo for nRF54L series which support KMU feature.
      *  branch **delta-dfu-sample-sysbuild** is the demo for SDK version is higher than 2.7.0.
      *  branch **delta-dfu-sample** is the demo for SDK version is lower than 2.7.0.
 
  .. note::
-    The nRF54L devices are equipped with Hardware Key Management Unit (KMU), the sample default enable it, that requires provisioning when in use.
-    Please refer to the `Performing KMU provisioning <https://docs.nordicsemi.com/bundle/ncs-latest/page/nrf/app_dev/device_guides/nrf54l/kmu_provision.html>`__ to provision it.
+    The nRF54L devices are equipped with Hardware Key Management Unit (KMU), the sample default enable it, that requires provisioning when in use. Please refer to the `Performing KMU provisioning <https://docs.nordicsemi.com/bundle/ncs-latest/page/nrf/app_dev/device_guides/nrf54l/kmu_provision.html>`__ to provision it.
 
-2. | Of course you can test it on any application samples, but you need to copy the following folders or files from our demo to your project root directory.
+2. | Of course you can test it on any application samples, but you need to copy the following folders or files from our demo to             your project root directory.
 
      * ``scripts`` folder contains tools for generating patch files.
      * ``binaries/signed_images`` folder is used to save source image and target image.
@@ -113,7 +115,7 @@ Prepare sample
 
 5. | enable delta dfu. you can modify ``child_image/mcuboot.conf`` file to
      set these macros for different chipsets if your SDK version is lower than 2.7.0, 
-	 or modify ``sysbuild.conf`` file if your SDK version is higher than 2.7.0:
+		 or modify ``sysbuild.conf`` file if your SDK version is higher than 2.7.0:
 
    .. code-block:: python
       :caption: child_image/mcuboot.conf.
@@ -128,7 +130,7 @@ Prepare sample
       # support application delta dfu
       CONFIG_BOOT_UPGRADE_APP_DELTA=y
       CONFIG_MAIN_STACK_SIZE=20480
-	  
+	
    .. code-block:: python
       :caption: sysbuild.conf.
       :linenos:
@@ -177,14 +179,14 @@ Generate patch file and transfer it to the secondary slot
    -  Get the target file, modify the source project and compile again, rename the upgrade image to ``target_xxx.bin``, then copy it to ``binaries/signed_images`` folder.
 
     .. note::
-	 * ``app_update.bin`` is your upgrade image if your SDK version is lower than 2.7.0
-	 * ``zephyr.signed.bin`` is your upgrade image if your SDK version is higher than 2.7.0
+     * ``app_update.bin`` is your upgrade image if your SDK version is lower than 2.7.0
+     * ``zephyr.signed.bin`` is your upgrade image if your SDK version is higher than 2.7.0
 
    -  Double click ``scripts/patch_***.exe`` to execute patch command, execute ``scripts/patch_52_91.exe`` if your chip is nRF52840 or nRF9160,
       and ``scripts/patch_54l15.exe`` if your chip is nRF54L15. then the differential file will be automatically generated in the directory ``binaries/patches``.    Please use the differential file ``signed_patch.bin`` as patch file.
 
     .. note::
-	If your device has been upgraded with delta dfu once, when upgrading again, you only need to rename the target_xxx.bin file of the last upgrade to source_xxx.bin, then copy the new target_xxx.bin file to the specified folder to regenerate the patch file. 
+    If your device has been upgraded with delta dfu once, when upgrading again, you only need to rename the target_xxx.bin file of the last upgrade to source_xxx.bin, then copy the new target_xxx.bin file to the specified folder to regenerate the patch file. 
 
 #. | Transmit the patch image to secondary slot. Now we supports multiple
      OTA methods, such as **4G/WiFi/Bluetooth/NFC**, etc. It can also be
